@@ -1,11 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../modules/actionCreators";
+import Main from "../pages/main";
+import ModalHandler from "../components/ModalHandler";
+
 class App extends Component {
   render() {
-    console.log(this);
-    this.props.setSomeAction("abc");
-    return <div>Hello</div>;
+    const { currentPage } = this.props;
+
+    if (currentPage === "main")
+      return (
+        <>
+          <Main />
+          <ModalHandler />
+        </>
+      );
   }
 }
 

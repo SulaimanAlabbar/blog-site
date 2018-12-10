@@ -1,1 +1,1 @@
-export const SOMEACTION = "SOMEACTION";
+export const SET_VISIBLE_MODAL = "SET_VISIBLE_MODAL";

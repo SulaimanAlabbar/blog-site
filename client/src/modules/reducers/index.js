@@ -1,19 +1,17 @@
-import { SOMEACTION } from "../actions";
+import { SET_VISIBLE_MODAL } from "../actions";
 
 const initialState = {
   currentPage: "main",
-  permissions: "guest"
+  permissions: "guest",
+  visibleModal: ""
 };
 
 export default (state = initialState, { type, payload }) => {
   switch (type) {
-    case SOMEACTION:
-      console.log("111");
+    case SET_VISIBLE_MODAL:
       return {
         ...state,
-        someAction: payload,
-        anotherAction: payload,
-        thirdAction: payload
+        visibleModal: payload
       };
 
     default:

@@ -1,6 +1,6 @@
-import { SOMEACTION } from "../actions";
+import { SET_VISIBLE_MODAL } from "../actions";
 
-export const setSomeAction = something => ({
-  type: SOMEACTION,
-  payload: something
+export const setVisibleModal = modal => ({
+  type: SET_VISIBLE_MODAL,
+  payload: modal
 });

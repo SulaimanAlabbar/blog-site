@@ -1,8 +1,12 @@
 {
   "name": "blog-site",
   "version": "0.1.0",
+  "description": "client for blog",
   "private": true,
+  "author": "sulaiman",
+  "license": "MIT",
   "dependencies": {
+    "axios": "^0.18.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-redux": "^6.0.0",
@@ -23,5 +27,6 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "proxy": "http://localhost:4000/"
 }
