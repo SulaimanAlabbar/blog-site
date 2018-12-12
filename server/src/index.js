@@ -3,6 +3,7 @@ bodyParser = require("body-parser");
 const multer = require("multer");
 const port = 4000;
 const getBlogInfo = require("./database/getBlogInfo");
+const login = require("./database/login");
 
 const server = express();
 
@@ -14,6 +15,18 @@ server.use(bodyParser.json());
 server.get("/api/blogInfo", async (req, res) => {
   const blogInfo = await getBlogInfo();
   res.json(blogInfo);
+});
+
+server.post("/api/login", async (req, res) => {
+  //validate
+  //hash passwords
+  const loggedIn = await login(req.body);
+  res.json(loggedIn);
+});
+
+server.get("/api/logout", async (req, res) => {
+  console.log("LOGOUT");
+  res.json(true);
 });
 
 server.get("/api/comments/:articleId/:from-:to", (req, res) => {

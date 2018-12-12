@@ -84,7 +84,145 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  align-items: flex-start;
+  height: 100%;
+  width: 100%;
   animation: bounceInDown 1s;
+}
+
+.UserPanel--logged--container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+}
+
+.UserPanel--logged--avatar {
+  order: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  animation: fadein 1s;
+}
+
+.UserPanel--logged--avatar--close {
+  order: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  animation: fadeout 1s;
+}
+
+@keyframes fadeout {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.UserPanelAvatar {
+  height: 130px;
+  width: 130px;
+  border-radius: 50%;
+}
+
+.UserPanel--logged--buttons--name {
+  order: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.UserPanel--logged--buttons {
+  order: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 100%;
+  width: 100%;
+  animation: bounceInDown 1s;
+}
+
+.UserPanel--logged--buttons--close {
+  order: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 100%;
+  width: 100%;
+  animation: bounceOutUp 1s;
+}
+
+@keyframes bounceOutUp {
+  20% {
+    transform: translate3d(0, -10px, 0);
+  }
+
+  40%,
+  45% {
+    opacity: 1;
+    transform: translate3d(0, 20px, 0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(0, -2000px, 0);
+  }
+}
+
+.UserPanel--logged--name {
+  order: 2;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 1.7rem;
+  color: white;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  bottom: 20px;
+  margin: 0;
+  animation: bounceInRight 1s;
+}
+
+.UserPanel--logged--name--close {
+  order: 2;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  font-size: 1.7rem;
+  color: white;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  bottom: 20px;
+  margin: 0;
+  animation: bounceOutRight 1s;
+}
+
+@keyframes bounceOutRight {
+  20% {
+    opacity: 1;
+    transform: translate3d(-20px, 0, 0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(2000px, 0, 0);
+  }
 }
 
 @keyframes bounceInDown {
@@ -359,15 +497,10 @@ body {
   overflow: hidden;
 }
 
-.LoginModal--container {
-  height: 300px;
-  width: 300px;
-}
-
 .LoginModal--modal {
   position: absolute;
-  width: 600px;
-  height: 400px;
+  width: 550px;
+  height: 420px;
   left: 50%;
   top: 50%;
   z-index: 11;
@@ -394,8 +527,8 @@ body {
 
 .LoginModal--modal--close {
   position: absolute;
-  width: 600px;
-  height: 400px;
+  width: 550px;
+  height: 420px;
   left: 50%;
   top: 50%;
   z-index: 11;
@@ -453,6 +586,175 @@ body {
   }
 }
 
+.LoginForm--container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.LoginForm--header {
+  order: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.LoginForm--header--header {
+  font-size: 3rem;
+}
+
+.LoginForm--header--loginFail {
+  color: red;
+  font-weight: 500;
+}
+
+.LoginForm--form {
+  order: 2;
+}
+
+.LoginForm--form--top {
+  order: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 10px;
+}
+
+.LoginForm--form--middle {
+  order: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 10px;
+}
+
+.LoginForm--form--middle2 {
+  order: 3;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 111px;
+}
+
+.LoginForm--form--bottom {
+  order: 4;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 20px 10px;
+}
+
+.LoginForm--label {
+  font-size: 1.2rem;
+  margin-right: 20px;
+}
+
+.pwslab {
+  margin-right: 26px;
+}
+
+.rmblab {
+  position: relative;
+  bottom: 4px;
+}
+
+.LoginForm--input {
+  width: 340px;
+  height: 40px;
+  font-size: 1.2rem;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.LoginForm--button {
+  order: 3;
+  width: 60px;
+  height: 40px;
+  color: white;
+  background-color: black;
+  height: 40px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+  cursor: pointer;
+  user-select: none;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  -webkit-transition-property: color;
+  transition-property: color;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+
+.LoginForm--button:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
+  -webkit-transform: scaleX(0);
+  transform: scaleX(0);
+  -webkit-transform-origin: 0 50%;
+  transform-origin: 0 50%;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-timing-function: ease-out;
+  transition-timing-function: ease-out;
+}
+.LoginForm--button:hover,
+.LoginForm--button:focus,
+.LoginForm--button:active {
+  color: black;
+}
+.LoginForm--button:hover:before,
+.LoginForm--button:focus:before,
+.LoginForm--button:active:before {
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+  color: yellow;
+}
+
+.LoginForm--checkbox {
+  height: 20px;
+  width: 20px;
+}
+
+.field-error {
+  color: red;
+  font-weight: 500;
+  position: relative;
+  right: 44px;
+  top: 5px;
+}
+
+.modalSuccess {
+  background-color: green;
+}
+.LoginSuccess {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4rem;
+  color: white;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  bottom: 20px;
+}
 .container--loader--big {
   height: 100%;
   display: flex;

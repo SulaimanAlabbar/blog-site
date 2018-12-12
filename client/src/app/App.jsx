@@ -19,7 +19,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => ({
-  permissions: state.permissions,
+  role: state.role,
   currentPage: state.currentPage
 });
 

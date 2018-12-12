@@ -22,8 +22,6 @@ module.exports = async () => {
     );
     await database.end();
 
-    console.log(response.rows[0]);
-
     return response.rows[0];
   } catch (error) {
     console.error(error);

@@ -1,9 +1,10 @@
-import { SET_VISIBLE_MODAL } from "../actions";
+import { SET_VISIBLE_MODAL, SET_LOGIN_INFO } from "../actions";
 
 const initialState = {
   currentPage: "main",
-  permissions: "guest",
-  visibleModal: ""
+  role: "guest",
+  visibleModal: "",
+  loggedIn: false
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -12,6 +13,17 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         visibleModal: payload
+      };
+    case SET_LOGIN_INFO:
+      return {
+        ...state,
+        id: payload.id,
+        name: payload.name,
+        email: payload.email,
+        avatar: payload.avatar,
+        joined: payload.joined,
+        role: payload.role,
+        loggedIn: true
       };
 
     default:
