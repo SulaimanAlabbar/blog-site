@@ -1,5 +1,5 @@
 const express = require("express");
-bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
 const multer = require("multer");
 const port = 4000;
 const getBlogInfo = require("./database/getBlogInfo");
