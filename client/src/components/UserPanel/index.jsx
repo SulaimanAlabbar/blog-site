@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import axios from "axios";
 import UserPanelButton from "./UserPanelButton";
 import UserPanelAvatar from "./UserPanelAvatar";
-import * as actionCreators from "../../modules/actionCreators";
+import * as actionCreators from "../../util/actionCreators";
 import "./style.css";
 
 class index extends Component {

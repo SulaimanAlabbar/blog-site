@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actionCreators from "../modules/actionCreators";
-import Main from "../pages/main";
-import ArticleCreation from "../pages/articleCreation";
+import * as actionCreators from "../util/actionCreators";
+import Main from "../routes/main";
+import ArticleCreation from "../routes/articleCreation";
 import ModalHandler from "../components/ModalHandler";
 import "./css/style.css";
 import "./css/animations.css";

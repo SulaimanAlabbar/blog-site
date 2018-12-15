@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actionCreators from "../../modules/actionCreators";
+import * as actionCreators from "../../util/actionCreators";
 // import { EditorState, convertToRaw, ContentState } from "draft-js";
 import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";

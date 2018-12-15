@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actionCreators from "../../modules/actionCreators";
+import * as actionCreators from "../../util/actionCreators";
 import DraftTitleInput from "./DraftTitleInput";
 import SubmitDraftButton from "./SubmitDraftButton";
 import "./style.css";
