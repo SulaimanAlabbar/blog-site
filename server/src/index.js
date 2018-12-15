@@ -29,6 +29,12 @@ server.get("/api/logout", async (req, res) => {
   res.json(true);
 });
 
+server.post("/api/submitDraft", async (req, res) => {
+  console.log("SUBMIT DRAFT");
+  console.log(req.body);
+  res.json(true);
+});
+
 server.get("/api/comments/:articleId/:from-:to", (req, res) => {
   res.json({
     articleId: req.params.articleId,

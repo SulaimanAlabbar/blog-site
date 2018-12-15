@@ -5,6 +5,8 @@ import Loader from "../Loader";
 import LoginSuccess from "./LoginSuccess";
 import axios from "axios";
 import * as actionCreators from "../../modules/actionCreators";
+import "./style.css";
+
 class index extends Component {
   constructor() {
     super();

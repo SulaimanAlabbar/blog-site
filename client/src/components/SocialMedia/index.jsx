@@ -1,11 +1,12 @@
 import React, { Component } from "react";
+import "./style.css";
 import SocialMediaIcon from "./SocialMediaIcon";
-import Facebook from "../../assets/facebook.svg";
-import Twitter from "../../assets/twitter.svg";
-import Youtube from "../../assets/youtube.svg";
-import Reddit from "../../assets/reddit.svg";
-import Linkedin from "../../assets/linkedin.svg";
-import Discord from "../../assets/discord.svg";
+import Facebook from "./icons/facebook.svg";
+import Twitter from "./icons/twitter.svg";
+import Youtube from "./icons/youtube.svg";
+import Reddit from "./icons/reddit.svg";
+import Linkedin from "./icons/linkedin.svg";
+import Discord from "./icons/discord.svg";
 
 export default class index extends Component {
   render() {

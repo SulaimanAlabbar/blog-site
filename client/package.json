@@ -7,9 +7,13 @@
   "license": "MIT",
   "dependencies": {
     "axios": "^0.18.0",
+    "draft-js": "^0.10.5",
+    "draftjs-to-html": "^0.8.4",
     "formik": "^1.4.0",
+    "html-to-draftjs": "^1.4.0",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
+    "react-draft-wysiwyg": "^1.12.13",
     "react-redux": "^6.0.0",
     "react-scripts": "2.1.1",
     "redux": "^4.0.1",

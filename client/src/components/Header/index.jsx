@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Loader from "../Loader";
 import axios from "axios";
 import Banner from "./Banner";
+import "./style.css";
+
 export default class index extends Component {
   constructor() {
     super();

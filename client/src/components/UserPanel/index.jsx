@@ -4,6 +4,8 @@ import axios from "axios";
 import UserPanelButton from "./UserPanelButton";
 import UserPanelAvatar from "./UserPanelAvatar";
 import * as actionCreators from "../../modules/actionCreators";
+import "./style.css";
+
 class index extends Component {
   constructor() {
     super();
