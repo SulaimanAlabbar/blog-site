@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../util/actionCreators";
-import Main from "../routes/main";
-import ArticleCreation from "../routes/articleCreation";
+import MainPage from "../routes/MainPage";
+import DraftPage from "../routes/DraftPage";
 import ModalHandler from "../components/ModalHandler";
 import "./css/style.css";
 import "./css/animations.css";
@@ -11,17 +11,17 @@ class App extends Component {
   render() {
     const { currentPage } = this.props;
 
-    if (currentPage === "main")
+    if (currentPage === "MainPage")
       return (
         <>
-          <Main />
+          <MainPage />
           <ModalHandler />
         </>
       );
-    else if (currentPage === "articleCreation") {
+    else if (currentPage === "DraftPage") {
       return (
         <>
-          <ArticleCreation />
+          <DraftPage />
           <ModalHandler />
         </>
       );

@@ -26,7 +26,7 @@ class index extends Component {
 
       try {
         const response = axios.post("/api/submitDraft", {
-          draft: "haha"
+          draft: "abc"
         });
       } catch (error) {
         console.error(error);

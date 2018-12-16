@@ -1,8 +1,13 @@
-import { SET_VISIBLE_MODAL, SET_LOGIN_INFO, SUBMIT_DRAFT } from "../actions";
+import {
+  SET_VISIBLE_MODAL,
+  SET_LOGIN_INFO,
+  SUBMIT_DRAFT,
+  SET_PAGE
+} from "../actions";
 
 const initialState = {
-  currentPage: "main",
-  role: "guest",
+  currentPage: "MainPage",
+  role: "owner",
   visibleModal: "",
   loggedIn: false,
   submittingDraft: false
@@ -31,6 +36,12 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         submittingDraft: payload
+      };
+
+    case SET_PAGE:
+      return {
+        ...state,
+        currentPage: payload
       };
 
     default:

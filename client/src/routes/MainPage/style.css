@@ -1,0 +1,57 @@
+.MainPage--container {
+  background-color: wheat;
+  display: grid;
+  grid-template-columns: 1fr 1450px 1fr 400px 1fr;
+  grid-template-rows: 1fr 150px 1fr 50px 1fr 50px 1fr 400px 1fr 600px 1fr 40px 2fr;
+  grid-gap: 5px;
+  padding: 20px 0;
+}
+
+.MainPage--Header {
+  background-color: #0094ff;
+  grid-column: 2/3;
+  grid-row: 2/5;
+}
+
+.MainPage--UserPanel {
+  background-color: blue;
+  grid-column: 4/5;
+  grid-row: 2/3;
+}
+
+.MainPage--SocialPanel {
+  background-color: snow;
+  grid-column: 4/5;
+  grid-row: 4/5;
+}
+
+.MainPage--Articles {
+  background-color: violet;
+  grid-column: 2/3;
+  grid-row: 6/11;
+}
+
+.MainPage--SearchPanel {
+  background-color: green;
+  grid-column: 4/5;
+  grid-row: 6/7;
+  user-select: none;
+}
+
+.MainPage--Description {
+  background-color: mediumaquamarine;
+  grid-column: 4/5;
+  grid-row: 8/9;
+}
+
+.MainPage--Archive {
+  background-color: yellowgreen;
+  grid-column: 4/5;
+  grid-row: 10/11;
+}
+
+.MainPage--Pagination {
+  background-color: orange;
+  grid-column: 2/3;
+  grid-row: 12/13;
+}

@@ -1,4 +1,9 @@
-import { SET_VISIBLE_MODAL, SET_LOGIN_INFO, SUBMIT_DRAFT } from "../actions";
+import {
+  SET_VISIBLE_MODAL,
+  SET_LOGIN_INFO,
+  SUBMIT_DRAFT,
+  SET_PAGE
+} from "../actions";
 
 export const setVisibleModal = modal => ({
   type: SET_VISIBLE_MODAL,
@@ -13,4 +18,9 @@ export const setLoginInfo = loginInfo => ({
 export const submitDraft = submit => ({
   type: SUBMIT_DRAFT,
   payload: submit
+});
+
+export const setPage = page => ({
+  type: SET_PAGE,
+  payload: page
 });

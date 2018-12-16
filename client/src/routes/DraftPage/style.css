@@ -1,0 +1,75 @@
+.DraftPage--container {
+  background-color: wheat;
+  display: grid;
+  grid-template-columns: auto 1450px 10px 400px auto;
+  grid-template-rows: 1px 150px 1px 50px 1px 50px 1px 400px 1px 400px 1px 40px 1px;
+  grid-gap: 5px;
+  padding: 20px 0;
+  min-height: 100vh;
+}
+
+.DraftPage--Header {
+  background-color: #0094ff;
+  grid-column: 2/3;
+  grid-row: 2/5;
+}
+
+.DraftPage--UserPanel {
+  background-color: blue;
+  grid-column: 4/5;
+  grid-row: 2/3;
+}
+
+.DraftPage--SocialPanel {
+  background-color: snow;
+  grid-column: 4/5;
+  grid-row: 4/5;
+}
+
+.DraftPage--DraftBar {
+  background-color: yellow;
+  grid-column: 2/3;
+  grid-row: 6/7;
+}
+
+.DraftPage--Draft {
+  background-color: violet;
+  grid-column: 2/3;
+  grid-row: 8/11;
+}
+
+.DraftPage--SearchPanel {
+  background-color: green;
+  grid-column: 4/5;
+  grid-row: 6/7;
+  user-select: none;
+}
+
+.DraftPage--Description {
+  background-color: mediumaquamarine;
+  grid-column: 4/5;
+  grid-row: 8/9;
+}
+
+.DraftPage--Archive {
+  background-color: yellowgreen;
+  grid-column: 4/5;
+  grid-row: 10/11;
+}
+
+.DraftPage--Pagination {
+  background-color: orange;
+  grid-column: 2/3;
+  grid-row: 12/13;
+}
+
+.pt-page-scaleUpDown {
+  animation: scaleUpDown 0.5s ease both;
+}
+
+@keyframes scaleUpDown {
+  from {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+}
