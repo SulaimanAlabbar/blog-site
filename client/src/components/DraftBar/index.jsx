@@ -1,22 +1,48 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../../util/actionCreators";
-import DraftTitleInput from "./DraftTitleInput";
-import SubmitDraftButton from "./SubmitDraftButton";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import "./style.css";
 
 class index extends Component {
-  handleClick() {
-    this.props.submitDraft(true);
-  }
-
   render() {
+    const titleSchema = Yup.object().shape({
+      title: Yup.string()
+        .min(3)
+        .max(120)
+        .required("Article Title is required")
+    });
+
     return (
-      <div className="DraftBar--container">
-        <h2 className="DraftBar--articleTitle">Article Title: </h2>
-        <DraftTitleInput />
-        <SubmitDraftButton onClick={() => this.handleClick()} />
-      </div>
+      <Formik
+        initialValues={{ title: "" }}
+        validationSchema={titleSchema}
+        onSubmit={title => {
+          this.props.setDraftTitle(title.title);
+          this.props.submitDraft(true);
+        }}
+        render={() => (
+          <Form className="DraftBar--container">
+            <Field
+              name="title"
+              placeholder="Article Title"
+              type="text"
+              maxLength="120"
+              className="DraftTitleInput"
+            />
+
+            <ErrorMessage
+              name="title"
+              component="div"
+              className="field-error DraftBar--error"
+            />
+            <button type="submit" className="SubmitDraftButton">
+              Submit Draft
+            </button>
+          </Form>
+        )}
+      />
     );
   }
 }

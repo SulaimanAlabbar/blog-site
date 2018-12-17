@@ -2,15 +2,21 @@ import {
   SET_VISIBLE_MODAL,
   SET_LOGIN_INFO,
   SUBMIT_DRAFT,
-  SET_PAGE
+  SET_PAGE,
+  SET_DRAFT_TITLE,
+  SET_DRAFT_CONTENT,
+  SET_NUM_ARTICLES,
+  SET_ARTICLES
 } from "../actions";
 
 const initialState = {
   currentPage: "MainPage",
-  role: "owner",
+  role: "guest",
   visibleModal: "",
   loggedIn: false,
-  submittingDraft: false
+  submittingDraft: false,
+  numOfArticles: 0,
+  articles: []
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -42,6 +48,30 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         currentPage: payload
+      };
+
+    case SET_DRAFT_TITLE:
+      return {
+        ...state,
+        draftTitle: payload
+      };
+
+    case SET_DRAFT_CONTENT:
+      return {
+        ...state,
+        draftContent: payload
+      };
+
+    case SET_NUM_ARTICLES:
+      return {
+        ...state,
+        numOfArticles: payload
+      };
+
+    case SET_ARTICLES:
+      return {
+        ...state,
+        articles: payload
       };
 
     default:

@@ -3,7 +3,6 @@ const { Client } = require("pg");
 module.exports = async articleInfo => {
   const title = articleInfo.title;
   const content = articleInfo.content;
-  const tags = articleInfo.tags;
   const authorId = articleInfo.authorId;
 
   try {
@@ -17,13 +16,13 @@ module.exports = async articleInfo => {
 
     await database.connect();
     const response = await database.query(
-      `insert into articles (title, content, tags, author_id) values ('${title}', ${content}, ARRAY${tags}, ${authorId});`
+      `insert into articles (title, content, author_id) values ('${title}', '${content}', ${authorId});`
     );
     await database.end();
 
-    console.log(response);
-    return "abc";
+    return true;
   } catch (error) {
     console.error(error);
+    return false;
   }
 };

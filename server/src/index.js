@@ -1,16 +1,20 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const multer = require("multer");
+const validator = require("validator");
 const port = 4000;
 const getBlogInfo = require("./database/getBlogInfo");
+const addArticle = require("./database/addArticle");
 const login = require("./database/login");
+const getNumOfArticles = require("./database/getNumOfArticles");
+const getArticles = require("./database/getArticles");
 
 const server = express();
 
 // server.use(express.static("public"));
 
-server.use(bodyParser.urlencoded({ extended: true }));
-server.use(bodyParser.json());
+server.use(bodyParser.json({ limit: "50mb" }));
+server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 
 server.get("/api/blogInfo", async (req, res) => {
   const blogInfo = await getBlogInfo();
@@ -30,9 +34,21 @@ server.get("/api/logout", async (req, res) => {
 });
 
 server.post("/api/submitDraft", async (req, res) => {
-  console.log("SUBMIT DRAFT");
-  console.log(req.body);
-  res.json(true);
+  if (!validator.isJSON(JSON.stringify(req.body.draftContent))) res.json(false);
+  else {
+    const articleAdded = await addArticle({
+      title: req.body.draftTitle,
+      content: JSON.stringify(req.body.draftContent),
+      authorId: req.body.userId
+    });
+
+    res.json(articleAdded);
+  }
+});
+
+server.get("/api/articles/:from", async (req, res) => {
+  const articles = await getArticles(req.params.from);
+  res.json(articles);
 });
 
 server.get("/api/comments/:articleId/:from-:to", (req, res) => {
@@ -40,6 +56,13 @@ server.get("/api/comments/:articleId/:from-:to", (req, res) => {
     articleId: req.params.articleId,
     from: req.params.from,
     to: req.params.to
+  });
+});
+
+server.get("/api/numOfArticles", async (req, res) => {
+  const numOfArticles = await getNumOfArticles();
+  res.json({
+    numOfArticles
   });
 });
 

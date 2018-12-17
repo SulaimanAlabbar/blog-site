@@ -5,12 +5,14 @@ import Header from "../../components/Header";
 import SocialMedia from "../../components/SocialMedia";
 import UserPanel from "../../components/UserPanel";
 import NewArticleButton from "../../components/NewArticleButton";
+import Articles from "../../components/Articles";
+import PagesBar from "../../components/PagesBar";
 import "./style.css";
 
 export default class main extends Component {
   render() {
     return (
-      <div className="MainPage--container">
+      <div className="MainPage--container pt-page-scaleUpDown">
         <div className="MainPage--Header">
           <Header />
         </div>
@@ -20,7 +22,9 @@ export default class main extends Component {
         <div className="MainPage--SocialPanel">
           <SocialMedia />
         </div>
-        <div className="MainPage--Articles">articles</div>
+        <div className="MainPage--Articles">
+          <Articles />
+        </div>
         <div className="MainPage--SearchPanel">
           <SearchPanel />
         </div>
@@ -28,7 +32,9 @@ export default class main extends Component {
           <Description />
         </div>
         <div className="MainPage--Archive">archive</div>
-        <div className="MainPage--Pagination">pagination</div>
+        <div className="MainPage--Pagination">
+          <PagesBar />
+        </div>
         <NewArticleButton />
       </div>
     );

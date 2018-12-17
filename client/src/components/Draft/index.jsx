@@ -1,54 +1,56 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../../util/actionCreators";
-// import { EditorState, convertToRaw, ContentState } from "draft-js";
-import { EditorState } from "draft-js";
+import { convertFromRaw } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
-// import draftToHtml from "draftjs-to-html";
-// import htmlToDraft from "html-to-draftjs";
-import axios from "axios";
 import "./style.css";
 import "./editorStyles.css";
+
+const content = {
+  entityMap: {},
+  blocks: [
+    {
+      key: "637gr",
+      text: "Initialized from content state.",
+      type: "unstyled",
+      depth: 0,
+      inlineStyleRanges: [],
+      entityRanges: [],
+      data: {}
+    }
+  ]
+};
 
 class index extends Component {
   constructor() {
     super();
-
+    const contentState = convertFromRaw(content);
     this.state = {
-      editorState: EditorState.createEmpty()
+      contentState
     };
-    this.onEditorStateChange = this.onEditorStateChange.bind(this);
+    this.onContentStateChange = this.onContentStateChange.bind(this);
   }
 
   componentDidUpdate = () => {
     if (this.props.submittingDraft) {
-      // handle submit
-
-      try {
-        const response = axios.post("/api/submitDraft", {
-          draft: "abc"
-        });
-      } catch (error) {
-        console.error(error);
-      }
+      this.props.setVisibleModal("submit");
+      this.props.setDraftContent(this.state.contentState);
     }
   };
 
-  onEditorStateChange(editorState) {
+  onContentStateChange(contentState) {
     this.setState({
-      editorState
+      contentState
     });
   }
 
   render() {
-    const { editorState } = this.state;
     return (
       <div className="Draft--container">
         <Editor
-          editorState={editorState}
           wrapperClassName="demo-wrapper"
           editorClassName="demo-editor"
-          onEditorStateChange={this.onEditorStateChange}
+          onContentStateChange={this.onContentStateChange}
         />
       </div>
     );
@@ -65,8 +67,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(index);
-
-//  <textarea
-//           disabled
-//           value={draftToHtml(convertToRaw(editorState.getCurrentContent()))}
-//     />
