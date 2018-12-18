@@ -20,7 +20,7 @@ const content = {
   ]
 };
 
-class index extends Component {
+class CommentDraft extends Component {
   constructor() {
     super();
     const contentState = convertFromRaw(content);
@@ -45,8 +45,9 @@ class index extends Component {
 
   render() {
     return (
-      <div className="Draft--container">
+      <div className="CommentDraft--container">
         <Editor
+          toolbarHidden
           wrapperClassName="demo-wrapper"
           editorClassName="demo-editor"
           onContentStateChange={this.onContentStateChange}
@@ -65,4 +66,4 @@ const mapDispatchToProps = actionCreators;
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(index);
+)(CommentDraft);

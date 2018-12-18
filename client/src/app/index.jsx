@@ -3,9 +3,11 @@ import { connect } from "react-redux";
 import * as actionCreators from "../util/actionCreators";
 import MainPage from "../routes/MainPage";
 import DraftPage from "../routes/DraftPage";
+import ArticlePage from "../routes/ArticlePage";
 import ModalHandler from "../components/ModalHandler";
 import "./css/style.css";
 import "./css/animations.css";
+import "./css/editorStyles.css";
 
 class App extends Component {
   render() {
@@ -22,6 +24,13 @@ class App extends Component {
       return (
         <>
           <DraftPage />
+          <ModalHandler />
+        </>
+      );
+    } else if (currentPage === "ArticlePage") {
+      return (
+        <>
+          <ArticlePage />
           <ModalHandler />
         </>
       );

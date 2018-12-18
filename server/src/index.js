@@ -2,12 +2,14 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const multer = require("multer");
 const validator = require("validator");
+const fs = require("fs");
 const port = 4000;
 const getBlogInfo = require("./database/getBlogInfo");
 const addArticle = require("./database/addArticle");
 const login = require("./database/login");
 const getNumOfArticles = require("./database/getNumOfArticles");
 const getArticles = require("./database/getArticles");
+const getArticle = require("./database/getArticle");
 
 const server = express();
 
@@ -34,16 +36,24 @@ server.get("/api/logout", async (req, res) => {
 });
 
 server.post("/api/submitDraft", async (req, res) => {
-  if (!validator.isJSON(JSON.stringify(req.body.draftContent))) res.json(false);
-  else {
+  if (!validator.isJSON(JSON.stringify(req.body.draftContent))) {
+    console.log("IS INVALID JSON");
+    res.json(false);
+  } else {
     const articleAdded = await addArticle({
       title: req.body.draftTitle,
-      content: JSON.stringify(req.body.draftContent),
+      content: req.body.draftContent,
       authorId: req.body.userId
     });
 
     res.json(articleAdded);
   }
+});
+
+server.get("/api/article/:id", async (req, res) => {
+  //verify that id is an integer
+  const article = await getArticle(req.params.id);
+  res.json(article);
 });
 
 server.get("/api/articles/:from", async (req, res) => {

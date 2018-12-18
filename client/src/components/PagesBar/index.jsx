@@ -11,7 +11,6 @@ class index extends Component {
   };
 
   clickHandler = async page => {
-    console.log("PAGE NUM: ", page);
     (function smoothscroll() {
       const currentScroll =
         document.documentElement.scrollTop || document.body.scrollTop;

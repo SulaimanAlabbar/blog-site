@@ -29,6 +29,17 @@ class index extends Component {
     }
   };
 
+  onArticleClick = async articleId => {
+    try {
+      const article = await axios.get(`/api/article/${articleId}`);
+      console.log(article.data);
+      this.props.setCurrentArticle(article.data);
+      this.props.setPage("ArticlePage");
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   render() {
     const { loaded } = this.state;
     const { articles } = this.props;
@@ -46,14 +57,12 @@ class index extends Component {
             {articles.map((article, index) => (
               <li className="Articles--Article--container" key={index}>
                 <div className="Articles--Article--header">
-                  <a
-                    className="Articles--Article--anchor"
-                    href="https://www.google.com/"
+                  <h1
+                    className="Articles--Article--title"
+                    onClick={() => this.onArticleClick(article.article_id)}
                   >
-                    <h1 className="Articles--Article--title">
-                      {article.article_title}
-                    </h1>
-                  </a>
+                    {article.article_title}
+                  </h1>
                   <h5 className="Articles--Article--author--date">
                     By {article.author_name} on{" "}
                     {new Date(article.article_created).toLocaleDateString()}

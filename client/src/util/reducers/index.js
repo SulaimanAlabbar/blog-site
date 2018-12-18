@@ -6,7 +6,8 @@ import {
   SET_DRAFT_TITLE,
   SET_DRAFT_CONTENT,
   SET_NUM_ARTICLES,
-  SET_ARTICLES
+  SET_ARTICLES,
+  SET_CURRENT_ARTICLE
 } from "../actions";
 
 const initialState = {
@@ -16,7 +17,9 @@ const initialState = {
   loggedIn: false,
   submittingDraft: false,
   numOfArticles: 0,
-  articles: []
+  articles: [],
+  comments: [],
+  currentArticle: ""
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -72,6 +75,12 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         articles: payload
+      };
+
+    case SET_CURRENT_ARTICLE:
+      return {
+        ...state,
+        currentArticle: payload
       };
 
     default:

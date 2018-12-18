@@ -6,7 +6,8 @@ import {
   SET_DRAFT_TITLE,
   SET_DRAFT_CONTENT,
   SET_NUM_ARTICLES,
-  SET_ARTICLES
+  SET_ARTICLES,
+  SET_CURRENT_ARTICLE
 } from "../actions";
 
 export const setVisibleModal = modal => ({
@@ -47,4 +48,9 @@ export const setNumOfArticles = numOfArticles => ({
 export const setArticles = articles => ({
   type: SET_ARTICLES,
   payload: articles
+});
+
+export const setCurrentArticle = article => ({
+  type: SET_CURRENT_ARTICLE,
+  payload: article
 });
