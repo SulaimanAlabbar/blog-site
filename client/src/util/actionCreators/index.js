@@ -5,6 +5,7 @@ import {
   SET_PAGE,
   SET_DRAFT_TITLE,
   SET_DRAFT_CONTENT,
+  SET_COMMENT_DRAFT_CONTENT,
   SET_NUM_ARTICLES,
   SET_ARTICLES,
   SET_CURRENT_ARTICLE
@@ -37,6 +38,11 @@ export const setDraftTitle = draftTitle => ({
 
 export const setDraftContent = draftContent => ({
   type: SET_DRAFT_CONTENT,
+  payload: draftContent
+});
+
+export const setCommentDraftContent = draftContent => ({
+  type: SET_COMMENT_DRAFT_CONTENT,
   payload: draftContent
 });
 

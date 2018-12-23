@@ -6,9 +6,11 @@ const fs = require("fs");
 const port = 4000;
 const getBlogInfo = require("./database/getBlogInfo");
 const addArticle = require("./database/addArticle");
+const addComment = require("./database/addComment");
 const login = require("./database/login");
 const getNumOfArticles = require("./database/getNumOfArticles");
 const getArticles = require("./database/getArticles");
+const getComments = require("./database/getComments");
 const getArticle = require("./database/getArticle");
 
 const server = express();
@@ -42,11 +44,26 @@ server.post("/api/submitDraft", async (req, res) => {
   } else {
     const articleAdded = await addArticle({
       title: req.body.draftTitle,
-      content: req.body.draftContent,
+      content: JSON.stringify(req.body.draftContent),
       authorId: req.body.userId
     });
 
     res.json(articleAdded);
+  }
+});
+
+server.post("/api/submitComment", async (req, res) => {
+  if (!validator.isJSON(JSON.stringify(req.body.comment))) {
+    console.log("IS INVALID JSON");
+    res.json(false);
+  } else {
+    const commentAdded = await addComment({
+      authorId: req.body.authorId,
+      articleId: req.body.articleId,
+      comment: JSON.stringify(req.body.comment)
+    });
+
+    res.json(commentAdded);
   }
 });
 
@@ -61,12 +78,12 @@ server.get("/api/articles/:from", async (req, res) => {
   res.json(articles);
 });
 
-server.get("/api/comments/:articleId/:from-:to", (req, res) => {
-  res.json({
-    articleId: req.params.articleId,
+server.get("/api/comments/:articleId-:from", async (req, res) => {
+  const comments = await getComments({
     from: req.params.from,
-    to: req.params.to
+    articleId: req.params.articleId
   });
+  res.json(comments);
 });
 
 server.get("/api/numOfArticles", async (req, res) => {

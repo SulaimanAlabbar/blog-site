@@ -1,69 +1,32 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import * as actionCreators from "../../util/actionCreators";
-import { convertFromRaw } from "draft-js";
-import { Editor } from "react-draft-wysiwyg";
-import "./style.css";
+import React from "react";
+import ReactQuill from "react-quill";
+import "../../app/css/quill.bubble.css";
 
-const content = {
-  entityMap: {},
-  blocks: [
-    {
-      key: "637gr",
-      text: "Initialized from content state.",
-      type: "unstyled",
-      depth: 0,
-      inlineStyleRanges: [],
-      entityRanges: [],
-      data: {}
-    }
-  ]
-};
-
-class CommentDraft extends Component {
-  constructor() {
-    super();
-    const contentState = convertFromRaw(content);
-    this.state = {
-      contentState
-    };
-    this.onContentStateChange = this.onContentStateChange.bind(this);
-  }
-
-  componentDidUpdate = () => {
-    if (this.props.submittingDraft) {
-      this.props.setVisibleModal("submit");
-      this.props.setDraftContent(this.state.contentState);
-    }
-  };
-
-  onContentStateChange(contentState) {
-    this.setState({
-      contentState
-    });
-  }
-
-  render() {
-    return (
-      <div className="CommentDraft--container">
-        <Editor
-          toolbarHidden
-          wrapperClassName="demo-wrapper"
-          editorClassName="demo-editor"
-          onContentStateChange={this.onContentStateChange}
-        />
-      </div>
-    );
-  }
+export default function CommentDraft(props) {
+  return (
+    <ReactQuill
+      value={props.draft}
+      onChange={props.handleChange}
+      theme="bubble"
+      modules={{
+        toolbar: {
+          container: [
+            [
+              "bold",
+              "italic",
+              "underline",
+              "strike",
+              { script: "sub" },
+              { script: "super" }
+            ],
+            ["clean"]
+          ]
+        }
+      }}
+      formats={["bold", "italic", "underline", "strike", "script"]}
+      placeholder="New comment..."
+      className="Draft--container"
+      ref={props.quillRef}
+    />
+  );
 }
-
-const mapStateToProps = state => ({
-  submittingDraft: state.submittingDraft
-});
-
-const mapDispatchToProps = actionCreators;
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CommentDraft);

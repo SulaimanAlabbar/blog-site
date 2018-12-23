@@ -1,57 +1,95 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../../util/actionCreators";
-import { convertFromRaw } from "draft-js";
-import { Editor } from "react-draft-wysiwyg";
+import ReactQuill from "react-quill";
 import "./style.css";
-
-const content = {
-  entityMap: {},
-  blocks: [
-    {
-      key: "637gr",
-      text: "Initialized from content state.",
-      type: "unstyled",
-      depth: 0,
-      inlineStyleRanges: [],
-      entityRanges: [],
-      data: {}
-    }
-  ]
-};
+import "../../app/css/quill.snow.css";
 
 class index extends Component {
-  constructor() {
-    super();
-    const contentState = convertFromRaw(content);
-    this.state = {
-      contentState
-    };
-    this.onContentStateChange = this.onContentStateChange.bind(this);
+  constructor(props) {
+    super(props);
+    this.state = { text: "" };
+    this.handleChange = this.handleChange.bind(this);
+    this.quillRef = React.createRef();
   }
+
+  componentDidMount = () => {
+    // this.quillRef.current.getEditor().setContents(avc);
+  };
 
   componentDidUpdate = () => {
     if (this.props.submittingDraft) {
       this.props.setVisibleModal("submit");
-      this.props.setDraftContent(this.state.contentState);
+      this.props.setDraftContent(
+        this.quillRef.current.getEditor().getContents()
+      );
     }
   };
 
-  onContentStateChange(contentState) {
-    this.setState({
-      contentState
-    });
+  modules = {
+    toolbar: {
+      container: [
+        [{ header: [1, 2, 3, false] }],
+        [
+          { align: [] },
+          { direction: "rtl" },
+          { indent: "-1" },
+          { indent: "+1" }
+        ],
+        [
+          "bold",
+          "italic",
+          "underline",
+          "strike",
+          { script: "sub" },
+          { script: "super" }
+        ],
+        ["blockquote", "code-block"],
+        [{ list: "ordered" }, { list: "bullet" }],
+        [{ color: [] }, { background: [] }],
+        ["link", "image", "video"],
+        ["clean"]
+      ]
+    }
+  };
+
+  formats = [
+    "header",
+    "align",
+    "direction",
+    "bold",
+    "italic",
+    "underline",
+    "strike",
+    "script",
+    "blockquote",
+    "code-block",
+    "list",
+    "bullet",
+    "color",
+    "background",
+    "indent",
+    "link",
+    "image",
+    "video"
+  ];
+
+  handleChange(value) {
+    this.setState({ text: value });
   }
 
   render() {
     return (
-      <div className="Draft--container">
-        <Editor
-          wrapperClassName="demo-wrapper"
-          editorClassName="demo-editor"
-          onContentStateChange={this.onContentStateChange}
-        />
-      </div>
+      <ReactQuill
+        value={this.state.text}
+        onChange={this.handleChange}
+        theme="snow"
+        modules={this.modules}
+        formats={this.formats}
+        placeholder="New article..."
+        className="Draft--container"
+        ref={this.quillRef}
+      />
     );
   }
 }

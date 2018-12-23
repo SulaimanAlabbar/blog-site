@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../../util/actionCreators";
-import draftToHtml from "draftjs-to-html";
+import { QuillDeltaToHtmlConverter } from "quill-delta-to-html";
 import ReactHtmlParser from "react-html-parser";
 import axios from "axios";
 import Loader from "../Loader";
@@ -19,11 +19,14 @@ class index extends Component {
   componentDidMount = async () => {
     try {
       const articlesInfo = await axios.get("/api/articles/0");
-      this.props.setArticles(articlesInfo.data);
 
-      this.setState({
-        loaded: true
-      });
+      if (articlesInfo.data) {
+        this.props.setArticles(articlesInfo.data);
+
+        this.setState({
+          loaded: true
+        });
+      }
     } catch (error) {
       console.error(error);
     }
@@ -69,7 +72,11 @@ class index extends Component {
                   </h5>
                 </div>
                 <div className="Articles--Article--body">
-                  {ReactHtmlParser(draftToHtml(article.article_content))}
+                  {ReactHtmlParser(
+                    new QuillDeltaToHtmlConverter(
+                      article.article_content.ops
+                    ).convert()
+                  )}
                 </div>
               </li>
             ))}

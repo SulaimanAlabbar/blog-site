@@ -2,7 +2,7 @@ const { Client } = require("pg");
 
 module.exports = async articleInfo => {
   const title = articleInfo.title;
-  const content = JSON.stringify(articleInfo.content);
+  const content = articleInfo.content;
   const authorId = articleInfo.authorId;
 
   try {

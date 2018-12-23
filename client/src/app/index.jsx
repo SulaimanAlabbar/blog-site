@@ -7,7 +7,6 @@ import ArticlePage from "../routes/ArticlePage";
 import ModalHandler from "../components/ModalHandler";
 import "./css/style.css";
 import "./css/animations.css";
-import "./css/editorStyles.css";
 
 class App extends Component {
   render() {
