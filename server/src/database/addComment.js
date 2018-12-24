@@ -16,7 +16,8 @@ module.exports = async commentInfo => {
 
     await database.connect();
     const response = await database.query(
-      `insert into comments (content, article_id, author_id) values ('${comment}', ${articleId}, ${authorId});`
+      `insert into comments (content, article_id, author_id) values ($1, $2, $3)`,
+      [comment, articleId, authorId]
     );
     await database.end();
 

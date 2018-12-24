@@ -1,6 +1,6 @@
 const { Client } = require("pg");
 
-module.exports = async id => {
+module.exports = async articleId => {
   try {
     const database = new Client({
       user: "blogdb",
@@ -24,7 +24,8 @@ module.exports = async id => {
   
   from articles, users
   where articles.author_id = users.id
-  and articles.id = ${id};`
+  and articles.id = $1`,
+      [articleId]
     );
     await database.end();
 

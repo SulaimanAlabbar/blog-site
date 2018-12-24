@@ -15,8 +15,9 @@ module.exports = async articleInfo => {
     });
 
     await database.connect();
-    const response = await database.query(
-      `insert into articles (title, content, author_id) values ('${title}', '${content}', ${authorId});`
+    await database.query(
+      `insert into articles (title, content, author_id) values ($1, $2, $3)`,
+      [title, content, authorId]
     );
     await database.end();
 

@@ -30,6 +30,11 @@ class index extends Component {
           comments: comments.data
         });
       }
+      else{
+        this.setState({
+          loaded: true,
+        });
+      }
     } catch (error) {
       console.error(error);
     }
