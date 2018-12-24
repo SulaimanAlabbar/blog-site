@@ -2,7 +2,7 @@ const { Client } = require("pg");
 
 module.exports = async articleInfo => {
   const title = articleInfo.title;
-  const content = JSON.stringify(articleInfo.content);
+  const content = articleInfo.content;
   const authorId = articleInfo.authorId;
 
   try {
@@ -15,8 +15,9 @@ module.exports = async articleInfo => {
     });
 
     await database.connect();
-    const response = await database.query(
-      `insert into articles (title, content, author_id) values ('${title}', '${content}', ${authorId});`
+    await database.query(
+      `insert into articles (title, content, author_id) values ($1, $2, $3)`,
+      [title, content, authorId]
     );
     await database.end();
 

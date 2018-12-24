@@ -28,3 +28,17 @@
   font-size: 1.2rem;
   font-weight: 500;
 }
+
+.Article--Article--body img {
+  display: block;
+  margin: 20px auto;
+  width: 540px;
+  height: auto;
+}
+
+.Article--Article--body .ql-video {
+  display: block;
+  margin: 20px auto;
+  width: 720px;
+  height: 480px;
+}

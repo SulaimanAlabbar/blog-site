@@ -25,7 +25,8 @@ module.exports = async from => {
   from articles, users
   where articles.author_id = users.id
   order by articles.created
-  limit 5 offset ${from};`
+  limit 5 offset $1`,
+      [from]
     );
     await database.end();
 

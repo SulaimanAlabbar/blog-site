@@ -6,6 +6,7 @@ import ReactHtmlParser from "react-html-parser";
 import axios from "axios";
 import Loader from "../Loader";
 import "./style.css";
+import { QuillDeltaToHtmlConverter } from "quill-delta-to-html";
 
 class index extends Component {
   componentDidMount = () => {
@@ -33,7 +34,11 @@ class index extends Component {
           </h5>
         </div>
         <div className="Article--Article--body">
-          {ReactHtmlParser(draftToHtml(currentArticle.article_content))}
+          {ReactHtmlParser(
+            new QuillDeltaToHtmlConverter(
+              currentArticle.article_content.ops
+            ).convert()
+          )}
         </div>
       </div>
     );

@@ -3,7 +3,7 @@ const { Client } = require("pg");
 module.exports = async commentInfo => {
   const authorId = commentInfo.authorId;
   const articleId = commentInfo.articleId;
-  const content = commentInfo.content;
+  const comment = commentInfo.comment;
 
   try {
     const database = new Client({
@@ -16,12 +16,12 @@ module.exports = async commentInfo => {
 
     await database.connect();
     const response = await database.query(
-      `insert into comments (content, article_id, author_id) values ('${content}', ${articleId}, ${authorId});`
+      `insert into comments (content, article_id, author_id) values ($1, $2, $3)`,
+      [comment, articleId, authorId]
     );
     await database.end();
 
-    console.log(response);
-    return "abc";
+    return response;
   } catch (error) {
     console.error(error);
   }

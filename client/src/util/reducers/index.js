@@ -5,6 +5,7 @@ import {
   SET_PAGE,
   SET_DRAFT_TITLE,
   SET_DRAFT_CONTENT,
+  SET_COMMENT_DRAFT_CONTENT,
   SET_NUM_ARTICLES,
   SET_ARTICLES,
   SET_CURRENT_ARTICLE
@@ -12,10 +13,11 @@ import {
 
 const initialState = {
   currentPage: "MainPage",
-  role: "guest",
+  role: "owner",
   visibleModal: "",
   loggedIn: false,
   submittingDraft: false,
+  submittingCommentDraft: false,
   numOfArticles: 0,
   articles: [],
   comments: [],
@@ -60,6 +62,12 @@ export default (state = initialState, { type, payload }) => {
       };
 
     case SET_DRAFT_CONTENT:
+      return {
+        ...state,
+        draftContent: payload
+      };
+
+    case SET_COMMENT_DRAFT_CONTENT:
       return {
         ...state,
         draftContent: payload

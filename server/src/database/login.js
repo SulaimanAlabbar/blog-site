@@ -12,7 +12,8 @@ module.exports = async ({ username, password }) => {
 
     await database.connect();
     const response = await database.query(
-      `select * from users where name = '${username}' and password = '${password}';`
+      `select * from users where name = $1 and password = $2`,
+      [username, password]
     );
     await database.end();
 
