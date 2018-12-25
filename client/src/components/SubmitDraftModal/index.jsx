@@ -20,9 +20,9 @@ class index extends Component {
     const { id, draftTitle, draftContent } = this.props;
     try {
       const submitInfo = await axios.post("/api/submitDraft", {
-        userId: id,
-        draftTitle: draftTitle,
-        draftContent: draftContent
+        authorId: id,
+        articleTitle: draftTitle,
+        articleContent: draftContent
       });
 
       this.setState(

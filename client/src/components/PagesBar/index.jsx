@@ -7,7 +7,7 @@ import "./style.css";
 class index extends Component {
   componentDidMount = async () => {
     const numOfArticles = await axios.get("/api/numOfArticles");
-    this.props.setNumOfArticles(numOfArticles.data.numOfArticles);
+    this.props.setNumOfArticles(numOfArticles.data);
   };
 
   clickHandler = async page => {

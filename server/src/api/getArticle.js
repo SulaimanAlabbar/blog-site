@@ -1,17 +1,11 @@
-const { Client } = require("pg");
+let db = require("../dbPool");
 
-module.exports = async articleId => {
+module.exports = async (req, res) => {
+  const client = await db.pool.connect();
   try {
-    const database = new Client({
-      user: "blogdb",
-      host: "localhost",
-      database: "blogdb",
-      password: "blogdb123",
-      port: 5432
-    });
+    //verify that id is an integer
 
-    await database.connect();
-    const response = await database.query(
+    const response = await client.query(
       `select 
     articles.id as article_id,
     articles.title as article_title,
@@ -25,14 +19,15 @@ module.exports = async articleId => {
   from articles, users
   where articles.author_id = users.id
   and articles.id = $1`,
-      [articleId]
+      [req.params.id]
     );
-    await database.end();
 
     if (response.rows.length === 0) return false;
 
-    return response.rows[0];
+    return res.status(200).json(response.rows[0]);
   } catch (error) {
     console.error(error);
+  } finally {
+    await client.release();
   }
 };
