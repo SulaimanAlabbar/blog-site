@@ -51,6 +51,8 @@ class index extends Component {
             password: this.state.password
           });
 
+          console.log(loginInfo.data)
+
           if (loginInfo.data === false) {
             this.setState({
               loaded: true,

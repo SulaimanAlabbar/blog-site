@@ -1,17 +1,9 @@
-const { Client } = require("pg");
+let db = require("../dbPool");
 
-module.exports = async from => {
+module.exports = async (req, res) => {
+  const client = await db.pool.connect();
   try {
-    const database = new Client({
-      user: "blogdb",
-      host: "localhost",
-      database: "blogdb",
-      password: "blogdb123",
-      port: 5432
-    });
-
-    await database.connect();
-    const response = await database.query(
+    const response = await client.query(
       `select 
     articles.id as article_id,
     articles.title as article_title,
@@ -26,14 +18,15 @@ module.exports = async from => {
   where articles.author_id = users.id
   order by articles.created
   limit 5 offset $1`,
-      [from]
+      [req.params.from]
     );
-    await database.end();
 
-    if (response.rows.length === 0) return false;
+    if (response.rows.length === 0) return res.status(200).json(false);
 
-    return response.rows;
+    return res.status(200).json(response.rows);
   } catch (error) {
     console.error(error);
+  } finally {
+    await client.release();
   }
 };

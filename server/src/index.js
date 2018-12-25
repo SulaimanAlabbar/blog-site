@@ -1,97 +1,47 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const multer = require("multer");
-const validator = require("validator");
-const fs = require("fs");
+const { Pool, Client } = require("pg");
+const getBlogInfo = require("./api/getBlogInfo");
+const addArticle = require("./api/addArticle");
+const addComment = require("./api/addComment");
+const login = require("./api/login");
+const getNumOfArticles = require("./api/getNumOfArticles");
+const getArticles = require("./api/getArticles");
+const getComments = require("./api/getComments");
+const getArticle = require("./api/getArticle");
+const dbConfig = require("./dbConfig.json");
+let db = require("./dbPool");
 const port = 4000;
-const getBlogInfo = require("./database/getBlogInfo");
-const addArticle = require("./database/addArticle");
-const addComment = require("./database/addComment");
-const login = require("./database/login");
-const getNumOfArticles = require("./database/getNumOfArticles");
-const getArticles = require("./database/getArticles");
-const getComments = require("./database/getComments");
-const getArticle = require("./database/getArticle");
+
+db.pool = new Pool({
+  user: dbConfig.user,
+  host: dbConfig.host,
+  database: dbConfig.database,
+  password: dbConfig.password,
+  port: dbConfig.port
+});
+
+db.pool.on("error", (err, client) => {
+  console.error("Unexpected error on idle client", err);
+  process.exit(-1);
+});
 
 const server = express();
-
 // server.use(express.static("public"));
 
 server.use(bodyParser.json({ limit: "50mb" }));
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 
-server.get("/api/blogInfo", async (req, res) => {
-  const blogInfo = await getBlogInfo();
-  res.json(blogInfo);
-});
-
-server.post("/api/login", async (req, res) => {
-  //validate
-  //hash passwords
-  const loggedIn = await login(req.body);
-  res.json(loggedIn);
-});
-
-server.get("/api/logout", async (req, res) => {
-  console.log("LOGOUT");
-  res.json(true);
-});
-
-server.post("/api/submitDraft", async (req, res) => {
-  if (!validator.isJSON(JSON.stringify(req.body.draftContent))) {
-    console.log("IS INVALID JSON");
-    res.json(false);
-  } else {
-    const articleAdded = await addArticle({
-      title: req.body.draftTitle,
-      content: JSON.stringify(req.body.draftContent),
-      authorId: req.body.userId
-    });
-
-    res.json(articleAdded);
-  }
-});
-
-server.post("/api/submitComment", async (req, res) => {
-  if (!validator.isJSON(JSON.stringify(req.body.comment))) {
-    console.log("IS INVALID JSON");
-    res.json(false);
-  } else {
-    const commentAdded = await addComment({
-      authorId: req.body.authorId,
-      articleId: req.body.articleId,
-      comment: JSON.stringify(req.body.comment)
-    });
-
-    res.json(commentAdded);
-  }
-});
-
-server.get("/api/article/:id", async (req, res) => {
-  //verify that id is an integer
-  const article = await getArticle(req.params.id);
-  res.json(article);
-});
-
-server.get("/api/articles/:from", async (req, res) => {
-  const articles = await getArticles(req.params.from);
-  res.json(articles);
-});
-
-server.get("/api/comments/:articleId-:from", async (req, res) => {
-  const comments = await getComments({
-    from: req.params.from,
-    articleId: req.params.articleId
-  });
-  res.json(comments);
-});
-
-server.get("/api/numOfArticles", async (req, res) => {
-  const numOfArticles = await getNumOfArticles();
-  res.json({
-    numOfArticles
-  });
-});
+server.get("/api/blogInfo", getBlogInfo);
+server.post("/api/login", login);
+server.get("/api/logout", async (req, res) => res.json(true));
+server.post("/api/submitDraft", addArticle);
+server.post("/api/submitComment", addComment);
+server.get("/api/article/:id", getArticle);
+server.get("/api/articles/:from", getArticles);
+server.get("/api/comments/:articleId-:from", getComments);
+server.get("/api/numOfArticles", getNumOfArticles);
 
 server.use((req, res) => {
   res.status(404).send({ url: req.originalUrl + " not found" });
