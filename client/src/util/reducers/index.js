@@ -13,7 +13,7 @@ import {
 
 const initialState = {
   currentPage: "MainPage",
-  role: "owner",
+  role: "guest",
   visibleModal: "",
   loggedIn: false,
   submittingDraft: false,

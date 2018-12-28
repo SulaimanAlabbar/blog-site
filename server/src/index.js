@@ -6,12 +6,13 @@ const getBlogInfo = require("./api/getBlogInfo");
 const addArticle = require("./api/addArticle");
 const addComment = require("./api/addComment");
 const login = require("./api/login");
+const register = require("./api/register");
 const getNumOfArticles = require("./api/getNumOfArticles");
 const getArticles = require("./api/getArticles");
 const getComments = require("./api/getComments");
 const getArticle = require("./api/getArticle");
-const dbConfig = require("./dbConfig.json");
-let db = require("./dbPool");
+const dbConfig = require("./database/dbConfig.json");
+let db = require("./database/dbPool");
 const port = 4000;
 
 db.pool = new Pool({
@@ -35,6 +36,7 @@ server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 
 server.get("/api/blogInfo", getBlogInfo);
 server.post("/api/login", login);
+server.post("/api/register", register);
 server.get("/api/logout", async (req, res) => res.json(true));
 server.post("/api/submitDraft", addArticle);
 server.post("/api/submitComment", addComment);

@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../../util/actionCreators";
-import draftToHtml from "draftjs-to-html";
+// import draftToHtml from "draftjs-to-html";
 import ReactHtmlParser from "react-html-parser";
-import axios from "axios";
-import Loader from "../Loader";
+// import axios from "axios";
+// import Loader from "../Loader";
 import "./style.css";
 import { QuillDeltaToHtmlConverter } from "quill-delta-to-html";
 

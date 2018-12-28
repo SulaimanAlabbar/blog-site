@@ -2,7 +2,7 @@
   background-color: wheat;
   display: grid;
   grid-template-columns: auto minmax(640px, 1450px) 400px auto;
-  grid-template-rows: 150px 50px 50px 400px 400px auto auto 500px;
+  grid-template-rows: 150px 50px 50px 400px 400px auto auto 320px;
   grid-template-areas:
     ".        Header       UserPanel       ."
     ".        Header       SocialPanel     ."
@@ -78,7 +78,7 @@
 }
 
 .ArticlePage--CommentDraft {
-  background-color: lightcoral;
+  background-color: #f5deb3;
   grid-area: CommentDraft;
 }
 

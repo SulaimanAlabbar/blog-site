@@ -3,4 +3,4 @@ client/package-lock.json
 server/node_modules
 server/package-lock.json
 log.txt
-server/src/dbConfig.json
+server/src/database/dbConfig.json

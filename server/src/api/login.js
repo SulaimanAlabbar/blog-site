@@ -1,4 +1,4 @@
-let db = require("../dbPool");
+let db = require("../database/dbPool");
 
 module.exports = async (req, res) => {
   const client = await db.pool.connect();

@@ -13,7 +13,7 @@ class index extends Component {
       closed: false
     };
     this.handleLogin = this.handleLogin.bind(this);
-    this.handleRegister = this.handleRegister.bind(this);
+    // this.handleRegister = this.handleRegister.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.handleSettings = this.handleSettings.bind(this);
   }
@@ -21,7 +21,9 @@ class index extends Component {
   handleLogin() {
     this.props.setVisibleModal("login");
   }
-  handleRegister() {}
+  handleRegister = () => {
+    this.props.setVisibleModal("register");
+  };
 
   handleLogout() {
     this.setState(

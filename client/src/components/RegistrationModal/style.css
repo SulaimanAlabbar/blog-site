@@ -1,0 +1,148 @@
+.RegistrationModal--modal {
+  position: absolute;
+  width: 700px;
+  height: 780px;
+  left: 50%;
+  top: 50%;
+  z-index: 11;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  background-color: #fff;
+  animation: zoomIn 0.4s;
+}
+
+.RegistrationModal--modal--close {
+  position: absolute;
+  width: 550px;
+  height: 420px;
+  left: 50%;
+  top: 50%;
+  z-index: 11;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  background-color: #fff;
+  animation: zoomOut 0.4s;
+}
+
+.RegistrationModal--shade {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  height: 100vh;
+  animation: fadein 0.4s;
+}
+
+.RegistrationModal--shade--close {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.8);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  height: 100vh;
+  animation: fadeout 0.4s;
+}
+
+.RegistrationForm--container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.RegistrationForm--header {
+  order: 1;
+  font-size: 3rem;
+}
+
+.RegistrationForm--form--container {
+  order: 2;
+}
+
+.RegistrationForm--form {
+  list-style-type: none;
+  padding: 0;
+  border-radius: 3px;
+  /* background-color: whitesmoke; */
+}
+
+.RegistrationForm--form--row {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5em;
+}
+
+.RegistrationForm--form--row > label {
+  flex: 1;
+  padding: 0.5em 1em 0.5em 0;
+  font-size: 1.2rem;
+  margin-right: 20px;
+}
+
+.RegistrationForm--form--row > input {
+  flex: 2;
+  width: 340px;
+  height: 20px;
+  font-size: 1.2rem;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.RegistrationForm--form--row > select {
+  flex: 2;
+  width: 340px;
+  height: 40px;
+  font-size: 1.1rem;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.RegistrationForm--form--row > input[type="checkbox"] {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 40px;
+  margin-right: 20px;
+}
+
+.RegistrationForm--form--row > input,
+.RegistrationForm--form--row > button,
+.RegistrationForm--form--row > select {
+  padding: 0.5em;
+}
+
+.RegistrationForm--form--row > button {
+  background: gray;
+  color: white;
+  border: 0;
+  height: 40px;
+  width: 100px;
+  font-size: 1.2rem;
+}
+
+.RegistrationForm--form--error {
+  color: red;
+  font-weight: 500;
+}
+
+.modalSuccess {
+  background-color: green;
+}
+
+.RegistrationSuccess {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 4rem;
+  color: white;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  bottom: 20px;
+}

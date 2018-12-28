@@ -1,4 +1,4 @@
-let db = require("../dbPool");
+let db = require("../database/dbPool");
 const validator = require("validator");
 
 module.exports = async (req, res) => {
