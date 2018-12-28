@@ -14,10 +14,8 @@ import "./style.css";
 
 class index extends Component {
   render() {
-    const { role, comments } = this.props;
+    const hideCommentDraft = this.props.role === "guest";
 
-    const hideCommentDraft = false;
-    // role === "guest" || (role !== "guest" && comments.length === 0);
     return (
       <div
         className={`ArticlePage--container${
@@ -60,8 +58,7 @@ class index extends Component {
 }
 
 const mapStateToProps = state => ({
-  role: state.role,
-  comments: state.comments
+  role: state.role
 });
 
 const mapDispatchToProps = actionCreators;

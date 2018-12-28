@@ -6,13 +6,11 @@ import countries from "./countries";
 
 export default class RegistrationForm extends Component {
   render() {
-    // const { RegistrationFail } = this.props;
     const {
       email,
       username,
       dateOfBirth,
       country,
-      termsOfServices,
       usernameTaken,
       emailTaken
     } = this.props;

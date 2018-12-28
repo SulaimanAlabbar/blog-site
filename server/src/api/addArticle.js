@@ -3,7 +3,6 @@ const validator = require("validator");
 
 module.exports = async (req, res) => {
   if (!validator.isJSON(JSON.stringify(req.body.articleContent))) {
-    console.log("IS INVALID JSON");
     return res.status(200).json(false);
   }
 

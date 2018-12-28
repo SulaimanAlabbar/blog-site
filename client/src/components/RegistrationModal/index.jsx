@@ -14,12 +14,8 @@ class index extends Component {
       loaded: true,
       email: "",
       username: "",
-      password: "",
-      confirmPassword: "",
       dateOfBirth: "",
       country: "country",
-      termsOfServices: false,
-      RegistrationFail: false,
       RegistrationSuccess: false,
       usernameTaken: false,
       emailTaken: false
@@ -47,11 +43,8 @@ class index extends Component {
         loaded: false,
         email: values.email,
         username: values.username,
-        password: values.password,
-        confirmPassword: values.confirmPassword,
         dateOfBirth: values.dateOfBirth,
-        country: values.country,
-        termsOfServices: values.termsOfServices
+        country: values.country
       },
       async () => {
         try {

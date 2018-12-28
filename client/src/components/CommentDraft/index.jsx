@@ -25,12 +25,9 @@ class index extends Component {
       });
 
       if (!commentSubmitted.data) {
-        //console.log("Don something here")
-        console.log("FAILED");
+        //console.log("Do something here")
       } else {
         this.setState({ text: "" });
-        //Scroll to top here?
-        console.log("SUCCEEDED");
       }
     } catch (error) {
       console.error(error);
