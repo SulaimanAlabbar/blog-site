@@ -15,7 +15,6 @@ import "./style.css";
 class index extends Component {
   render() {
     const hideCommentDraft = this.props.role === "guest";
-
     return (
       <div
         className={`ArticlePage--container${
@@ -32,7 +31,7 @@ class index extends Component {
           <SocialMedia />
         </div>
         <div className="ArticlePage--Article">
-          <Article />
+          <Article articleId={this.props.router.match.params.articleId} />
         </div>
         <div className="ArticlePage--SearchPanel">
           <SearchPanel />
