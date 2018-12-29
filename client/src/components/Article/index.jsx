@@ -7,11 +7,12 @@ import axios from "axios";
 import Loader from "../Loader";
 import "./style.css";
 import { QuillDeltaToHtmlConverter } from "quill-delta-to-html";
+import { withRouter, Redirect } from "react-router-dom";
 
 class index extends Component {
   state = {
     loaded: false,
-    article: null
+    falseArticleId: false
   };
 
   componentDidMount = async () => {
@@ -25,26 +26,26 @@ class index extends Component {
     })();
 
     try {
-      console.log("asd", this.props.articleId);
       const article = await axios.get(`/api/article/${this.props.articleId}`);
-      //this.props.setCurrentArticle(article.data);
-      //this.props.setPage("ArticlePage");
+      this.props.setCurrentArticle(article.data);
 
-      console.log(article.data);
-      if (!article.data) {
+      if (article.data) {
+        this.setState({
+          loaded: true
+        });
+      } else {
         this.setState({
           loaded: true,
-          article: article.data
+          falseArticleId: true
         });
-      } else console.log("NO SUCH ARTICLE");
-      //redirect?
+      }
     } catch (error) {
       console.error(error);
     }
   };
 
   render() {
-    const { loaded, article } = this.state;
+    const { loaded, falseArticleId } = this.state;
     const { currentArticle } = this.props;
 
     if (!loaded)
@@ -53,20 +54,25 @@ class index extends Component {
           <Loader />
         </div>
       );
-    else
+    else if (falseArticleId) {
+      console.log("false article id");
+      return <Redirect exact push to="/" />;
+    } else
       return (
         <div className="Article--container">
           <div className="Article--Article--header">
-            <h1 className="Article--Article--title">{article.article_title}</h1>
+            <h1 className="Article--Article--title">
+              {currentArticle.article_title}
+            </h1>
             <h5 className="Article--Article--author--date">
-              By {article.author_name} on{" "}
-              {new Date(article.article_created).toLocaleDateString()}
+              By {currentArticle.author_name} on{" "}
+              {new Date(currentArticle.article_created).toLocaleDateString()}
             </h5>
           </div>
           <div className="Article--Article--body">
             {ReactHtmlParser(
               new QuillDeltaToHtmlConverter(
-                article.article_content.ops
+                currentArticle.article_content.ops
               ).convert()
             )}
           </div>
@@ -80,7 +86,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = actionCreators;
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(index);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(index)
+);

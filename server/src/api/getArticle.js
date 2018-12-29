@@ -5,8 +5,6 @@ module.exports = async (req, res) => {
   try {
     //verify that id is an integer
 
-    console.log("ABC: ", req.params.id);
-
     const response = await client.query(
       `select 
     articles.id as article_id,
@@ -24,9 +22,8 @@ module.exports = async (req, res) => {
       [req.params.id]
     );
 
-    if (response.rows.length === 0) return false;
-
-    res.status(200).json(response.rows[0]);
+    if (response.rows.length === 0) return res.status(200).json(false);
+    return res.status(200).json(response.rows[0]);
   } catch (error) {
     console.error(error);
   } finally {

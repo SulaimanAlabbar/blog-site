@@ -10,6 +10,7 @@ import NewArticleButton from "../../components/NewArticleButton";
 import Article from "../../components/Article";
 import Comments from "../../components/Comments";
 import CommentDraft from "../../components/CommentDraft";
+import { withRouter } from "react-router";
 import "./style.css";
 
 class index extends Component {
@@ -31,7 +32,7 @@ class index extends Component {
           <SocialMedia />
         </div>
         <div className="ArticlePage--Article">
-          <Article articleId={this.props.router.match.params.articleId} />
+          <Article articleId={this.props.match.params.articleId} />
         </div>
         <div className="ArticlePage--SearchPanel">
           <SearchPanel />
@@ -62,7 +63,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = actionCreators;
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(index);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(index)
+);

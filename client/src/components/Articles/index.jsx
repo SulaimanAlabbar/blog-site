@@ -34,9 +34,9 @@ class index extends Component {
 
   onArticleClick = async articleId => {
     try {
-      const article = await axios.get(`/api/article/${articleId}`);
-      this.props.setCurrentArticle(article.data);
-      this.props.setPage("ArticlePage");
+      // const article = await axios.get(`/api/article/${articleId}`);
+      // this.props.setCurrentArticle(article.data);
+      // this.props.setPage("ArticlePage");
     } catch (error) {
       console.error(error);
     }

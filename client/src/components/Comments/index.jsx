@@ -17,27 +17,25 @@ class index extends Component {
   }
 
   componentDidMount = async () => {
-    try {
-      const comments = await axios.get(
-        `/api/comments/${this.props.articleId}-${0}`
-      );
-
-      if (comments.data) {
-        //this.props.setArticles(articlesInfo.data);
-
-        this.setState({
-          loaded: true,
-          comments: comments.data
-        });
-      }
-      else{
-        this.setState({
-          loaded: true,
-        });
-      }
-    } catch (error) {
-      console.error(error);
-    }
+    // console.log(this.props.articleId);
+    // try {
+    //   const comments = await axios.get(
+    //     `/api/comments/${this.props.articleId}-${0}`
+    //   );
+    //   if (comments.data) {
+    //     //this.props.setArticles(articlesInfo.data);
+    //     this.setState({
+    //       loaded: true,
+    //       comments: comments.data
+    //     });
+    //   } else {
+    //     this.setState({
+    //       loaded: true
+    //     });
+    //   }
+    // } catch (error) {
+    //   console.error(error);
+    // }
   };
 
   render() {
