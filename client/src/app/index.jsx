@@ -7,7 +7,7 @@ import ArticlePage from "../routes/ArticlePage";
 import ModalHandler from "../components/ModalHandler";
 import "./css/style.css";
 import "./css/animations.css";
-import { Switch, Route } from "react-router-dom";
+import { withRouter, Switch, Route } from "react-router-dom";
 
 class App extends Component {
   render() {
@@ -55,7 +55,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = actionCreators;
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(App)
+);

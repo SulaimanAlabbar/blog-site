@@ -3,8 +3,9 @@ import Loader from "../Loader";
 import axios from "axios";
 import Banner from "./Banner";
 import "./style.css";
+import { withRouter, Link } from "react-router-dom";
 
-export default class index extends Component {
+class index extends Component {
   constructor() {
     super();
     this.state = {
@@ -15,6 +16,7 @@ export default class index extends Component {
   }
 
   componentDidMount = async () => {
+    console.log("updated");
     try {
       const blogInfo = await axios.get("/api/blogInfo");
       this.setState({
@@ -35,6 +37,13 @@ export default class index extends Component {
           <Loader />
         </div>
       );
-    else return <Banner image={bannerImage} />;
+    else
+      return (
+        <Link to="/">
+          <Banner image={bannerImage} />
+        </Link>
+      );
   }
 }
+
+export default withRouter(index);

@@ -6,6 +6,7 @@ import ReactHtmlParser from "react-html-parser";
 import axios from "axios";
 import Loader from "../Loader";
 import "./style.css";
+import { withRouter, Link } from "react-router-dom";
 
 class index extends Component {
   constructor() {
@@ -59,12 +60,11 @@ class index extends Component {
             {articles.map((article, index) => (
               <li className="Articles--Article--container" key={index}>
                 <div className="Articles--Article--header">
-                  <h1
-                    className="Articles--Article--title"
-                    onClick={() => this.onArticleClick(article.article_id)}
-                  >
-                    {article.article_title}
-                  </h1>
+                  <Link to={`${article.article_id}`}>
+                    <h1 className="Articles--Article--title">
+                      {article.article_title}
+                    </h1>
+                  </Link>
                   <h5 className="Articles--Article--author--date">
                     By {article.author_name} on{" "}
                     {new Date(article.article_created).toLocaleDateString()}
@@ -90,7 +90,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = actionCreators;
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(index);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(index)
+);

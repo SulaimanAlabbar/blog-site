@@ -55,8 +55,7 @@ class index extends Component {
         </div>
       );
     else if (falseArticleId) {
-      console.log("false article id");
-      return <Redirect exact push to="/" />;
+      return <Redirect to="/" />;
     } else
       return (
         <div className="Article--container">
