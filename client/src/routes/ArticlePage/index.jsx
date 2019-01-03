@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actionCreators from "../../util/actionCreators";
+import { withRouter } from "react-router";
 import SearchPanel from "../../components/SearchPanel";
 import Description from "../../components/Description";
 import Header from "../../components/Header";
@@ -10,7 +11,6 @@ import NewArticleButton from "../../components/NewArticleButton";
 import Article from "../../components/Article";
 import Comments from "../../components/Comments";
 import CommentDraft from "../../components/CommentDraft";
-import { withRouter } from "react-router";
 import "./style.css";
 
 class index extends Component {

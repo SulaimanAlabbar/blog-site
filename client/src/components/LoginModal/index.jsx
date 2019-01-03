@@ -1,29 +1,34 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import axios from "axios";
 import LoginForm from "./LoginForm";
 import Loader from "../Loader";
 import LoginSuccess from "./LoginSuccess";
-import axios from "axios";
 import * as actionCreators from "../../util/actionCreators";
 import "./style.css";
 
 class index extends Component {
-  constructor() {
-    super();
-    this.state = {
-      modalClosed: false,
-      loaded: true,
-      username: "",
-      password: "",
-      remember: false,
-      loginFail: false,
-      loginSuccess: false
-    };
-    this.onShadeClick = this.onShadeClick.bind(this);
-    this.formSubmitHandler = this.formSubmitHandler.bind(this);
-  }
+  isMounted = false;
 
-  onShadeClick() {
+  state = {
+    modalClosed: false,
+    loaded: true,
+    username: "",
+    password: "",
+    // remember: false,
+    loginFail: false,
+    loginSuccess: false
+  };
+
+  componentDidMount = () => {
+    this.isMounted = true;
+  };
+
+  componentWillUnmount = () => {
+    this.isMounted = false;
+  };
+
+  onShadeClick = () => {
     this.setState(
       {
         modalClosed: true
@@ -34,15 +39,15 @@ class index extends Component {
         }, 400);
       }
     );
-  }
+  };
 
   formSubmitHandler = async values => {
     this.setState(
       {
         loaded: false,
         username: values.username,
-        password: values.password,
-        remember: values.remember
+        password: values.password
+        //    remember: values.remember
       },
       async () => {
         try {
@@ -102,7 +107,7 @@ class index extends Component {
         </div>
         <div
           className={`LoginModal--shade${modalClosed}`}
-          onClick={() => this.onShadeClick()}
+          onClick={this.onShadeClick}
         />
       </>
     );

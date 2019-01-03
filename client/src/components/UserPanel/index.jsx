@@ -7,25 +7,29 @@ import * as actionCreators from "../../util/actionCreators";
 import "./style.css";
 
 class index extends Component {
-  constructor() {
-    super();
-    this.state = {
-      closed: false
-    };
-    this.handleLogin = this.handleLogin.bind(this);
-    // this.handleRegister = this.handleRegister.bind(this);
-    this.handleLogout = this.handleLogout.bind(this);
-    this.handleSettings = this.handleSettings.bind(this);
-  }
+  isMounted = false;
 
-  handleLogin() {
+  state = {
+    closed: false
+  };
+
+  componentDidMount = async () => {
+    this.isMounted = true;
+  };
+
+  componentWillUnmount = () => {
+    this.isMounted = false;
+  };
+
+  handleLogin = () => {
     this.props.setVisibleModal("login");
-  }
+  };
+
   handleRegister = () => {
     this.props.setVisibleModal("register");
   };
 
-  handleLogout() {
+  handleLogout = () => {
     this.setState(
       {
         closed: true
@@ -56,9 +60,9 @@ class index extends Component {
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
-  handleSettings() {}
+  handleSettings = () => {};
 
   render() {
     const { role, name, avatar } = this.props;
@@ -67,34 +71,25 @@ class index extends Component {
     if (role === "guest") {
       return (
         <div className="UserPanel--container">
-          <UserPanelButton text="Login" onClick={() => this.handleLogin()} />
-          <UserPanelButton
-            text="Register"
-            onClick={() => this.handleRegister()}
-          />
+          <UserPanelButton text="Login" onClick={this.handleLogin} />
+          <UserPanelButton text="Register" onClick={this.handleRegister} />
         </div>
       );
-    } else
-      return (
-        <div className="UserPanel--logged--container">
-          <div className={`UserPanel--logged--avatar${closed}`}>
-            <UserPanelAvatar avatar={avatar} />
-          </div>
-          <div className="UserPanel--logged--buttons--name">
-            <div className={`UserPanel--logged--buttons${closed}`}>
-              <UserPanelButton
-                text="Logout"
-                onClick={() => this.handleLogout()}
-              />
-              <UserPanelButton
-                text="Settings"
-                onClick={() => this.handleSettings()}
-              />
-            </div>
-            <h2 className={`UserPanel--logged--name${closed}`}>{name}</h2>
-          </div>
+    }
+    return (
+      <div className="UserPanel--logged--container">
+        <div className={`UserPanel--logged--avatar${closed}`}>
+          <UserPanelAvatar avatar={avatar} />
         </div>
-      );
+        <div className="UserPanel--logged--buttons--name">
+          <div className={`UserPanel--logged--buttons${closed}`}>
+            <UserPanelButton text="Logout" onClick={this.handleLogout} />
+            <UserPanelButton text="Settings" onClick={this.handleSettings} />
+          </div>
+          <h2 className={`UserPanel--logged--name${closed}`}>{name}</h2>
+        </div>
+      </div>
+    );
   }
 }
 

@@ -18,7 +18,7 @@ const initialState = {
   loggedIn: false,
   submittingDraft: false,
   submittingCommentDraft: false,
-  numOfArticles: 0,
+  numOfArticles: null,
   articles: [],
   comments: [],
   currentArticle: ""

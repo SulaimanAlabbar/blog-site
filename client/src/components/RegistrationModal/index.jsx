@@ -1,30 +1,36 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import axios from "axios";
 import RegistrationForm from "./RegistrationForm";
 import Loader from "../Loader";
-import axios from "axios";
 import * as actionCreators from "../../util/actionCreators";
 import "./style.css";
 
 class index extends Component {
-  constructor() {
-    super();
-    this.state = {
-      modalClosed: false,
-      loaded: true,
-      email: "",
-      username: "",
-      dateOfBirth: "",
-      country: "country",
-      RegistrationSuccess: false,
-      usernameTaken: false,
-      emailTaken: false
-    };
-    this.onShadeClick = this.onShadeClick.bind(this);
-    this.formSubmitHandler = this.formSubmitHandler.bind(this);
-  }
+  isMounted = false;
 
-  onShadeClick() {
+  state = {
+    modalClosed: false,
+    loaded: true,
+    email: "",
+    username: "",
+    dateOfBirth: "",
+    country: "country",
+    RegistrationSuccess: false,
+    usernameTaken: false,
+    emailTaken: false
+  };
+
+  componentDidMount = () => {
+    this.isMounted = true;
+  };
+
+  componentWillUnmount = () => {
+    this.isMounted = false;
+  };
+
+  onShadeClick = () => {
     this.setState(
       {
         modalClosed: true
@@ -35,7 +41,7 @@ class index extends Component {
         }, 400);
       }
     );
-  }
+  };
 
   formSubmitHandler = async values => {
     this.setState(
@@ -99,34 +105,56 @@ class index extends Component {
     const modalClosed = this.state.modalClosed ? "--close" : "";
     const modalSuccess = this.state.RegistrationSuccess ? "modalSuccess" : "";
 
+    if (loaded)
+      return (
+        <>
+          <div
+            className={`RegistrationModal--modal${modalClosed} ${modalSuccess}`}
+          >
+            <div className="container--loader--big">
+              <Loader />
+            </div>
+          </div>
+          {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+          <div
+            className={`RegistrationModal--shade${modalClosed}`}
+            onClick={this.onShadeClick}
+          />
+        </>
+      );
+
+    if (RegistrationSuccess)
+      return (
+        <>
+          <div
+            className={`RegistrationModal--modal${modalClosed} ${modalSuccess}`}
+          >
+            <h1 className="RegistrationSuccess">Register Success</h1>
+          </div>
+          <div
+            className={`RegistrationModal--shade${modalClosed}`}
+            onClick={this.onShadeClick}
+          />
+        </>
+      );
     return (
       <>
         <div
           className={`RegistrationModal--modal${modalClosed} ${modalSuccess}`}
         >
-          {loaded ? (
-            RegistrationSuccess ? (
-              <h1 className="RegistrationSuccess">Register Success</h1>
-            ) : (
-              <RegistrationForm
-                onSubmit={this.formSubmitHandler}
-                email={email}
-                username={username}
-                dateOfBirth={dateOfBirth}
-                country={country}
-                usernameTaken={usernameTaken}
-                emailTaken={emailTaken}
-              />
-            )
-          ) : (
-            <div className="container--loader--big">
-              <Loader />
-            </div>
-          )}
+          <RegistrationForm
+            onSubmit={this.formSubmitHandler}
+            email={email}
+            username={username}
+            dateOfBirth={dateOfBirth}
+            country={country}
+            usernameTaken={usernameTaken}
+            emailTaken={emailTaken}
+          />
         </div>
         <div
           className={`RegistrationModal--shade${modalClosed}`}
-          onClick={() => this.onShadeClick()}
+          onClick={this.onShadeClick}
         />
       </>
     );

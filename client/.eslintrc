@@ -1,0 +1,9 @@
+{
+  "extends": ["react-app", "airbnb", "prettier", "prettier/react"],
+  "plugins": ["react", "jsx-a11y", "import", "prettier"],
+  "rules": {
+    "react/prop-types": 0,
+    "linebreak-style": 0,
+    "react/destructuring-assignment": 0
+  }
+}

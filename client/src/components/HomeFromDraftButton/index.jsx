@@ -11,7 +11,7 @@ class index extends Component {
   render() {
     return (
       <div className="container--HomeFromDraftButton">
-        <div className="HomeFromDraftButton" onClick={() => this.handleClick()}>
+        <div className="HomeFromDraftButton" onClick={this.handleClick}>
           Return To Home
         </div>
       </div>

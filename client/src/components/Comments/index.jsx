@@ -1,20 +1,27 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actionCreators from "../../util/actionCreators";
+import axios from "axios";
 import { QuillDeltaToHtmlConverter } from "quill-delta-to-html";
 import ReactHtmlParser from "react-html-parser";
-import axios from "axios";
+import * as actionCreators from "../../util/actionCreators";
 import Loader from "../Loader";
 import "./style.css";
 
 class index extends Component {
-  constructor() {
-    super();
-    this.state = {
-      loaded: false,
-      comments: []
-    };
-  }
+  isMounted = false;
+
+  state = {
+    loaded: false,
+    comments: []
+  };
+
+  componentDidMount = () => {
+    this.isMounted = true;
+  };
+
+  componentWillUnmount = () => {
+    this.isMounted = false;
+  };
 
   componentDidUpdate = async () => {
     if (this.props.articleId !== undefined) {
@@ -46,35 +53,34 @@ class index extends Component {
           <Loader />
         </div>
       );
-    else
-      return (
-        <div className="Comments--container">
-          <ul className="Comments--CommentsList">
-            {comments.map((comment, index) => (
-              <li className="Comments--Comment--container" key={index}>
-                <div className="Comments--Comment--header">
-                  <img
-                    src={comment.author_avatar}
-                    alt="userAvatar"
-                    className="Comments--Comment--avatar"
-                  />
-                  <h5 className="Comments--Comment--author--date">
-                    By {comment.author_name} on{" "}
-                    {new Date(comment.comment_created).toLocaleString()}
-                  </h5>
-                </div>
-                <div className="Comments--Comment--body">
-                  {ReactHtmlParser(
-                    new QuillDeltaToHtmlConverter(
-                      JSON.parse(comment.comment_content).ops
-                    ).convert()
-                  )}
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      );
+    return (
+      <div className="Comments--container">
+        <ul className="Comments--CommentsList">
+          {comments.map((comment, i) => (
+            <li className="Comments--Comment--container" key={i}>
+              <div className="Comments--Comment--header">
+                <img
+                  src={comment.author_avatar}
+                  alt="userAvatar"
+                  className="Comments--Comment--avatar"
+                />
+                <h5 className="Comments--Comment--author--date">
+                  By {comment.author_name} on{" "}
+                  {new Date(comment.comment_created).toLocaleString()}
+                </h5>
+              </div>
+              <div className="Comments--Comment--body">
+                {ReactHtmlParser(
+                  new QuillDeltaToHtmlConverter(
+                    JSON.parse(comment.comment_content).ops
+                  ).convert()
+                )}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
   }
 }
 

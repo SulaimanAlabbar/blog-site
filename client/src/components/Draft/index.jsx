@@ -1,31 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actionCreators from "../../util/actionCreators";
 import ReactQuill from "react-quill";
+import * as actionCreators from "../../util/actionCreators";
 import "./style.css";
 import "../../app/css/quill.snow.css";
 
 class index extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { text: "" };
-    this.handleChange = this.handleChange.bind(this);
-    this.quillRef = React.createRef();
-  }
-
-  componentDidMount = () => {
-    // this.quillRef.current.getEditor().setContents(avc);
-  };
-
-  componentDidUpdate = () => {
-    if (this.props.submittingDraft) {
-      this.props.setVisibleModal("submit");
-      this.props.setDraftContent(
-        this.quillRef.current.getEditor().getContents()
-      );
-    }
-  };
-
   modules = {
     toolbar: {
       container: [
@@ -73,6 +53,22 @@ class index extends Component {
     "image",
     "video"
   ];
+
+  constructor(props) {
+    super(props);
+    this.state = { text: "" };
+    this.handleChange = this.handleChange.bind(this);
+    this.quillRef = React.createRef();
+  }
+
+  componentDidUpdate = () => {
+    if (this.props.submittingDraft) {
+      this.props.setVisibleModal("submit");
+      this.props.setDraftContent(
+        this.quillRef.current.getEditor().getContents()
+      );
+    }
+  };
 
   handleChange(value) {
     this.setState({ text: value });

@@ -7,14 +7,15 @@ class index extends Component {
   handleClick = () => {
     this.props.setPage("DraftPage");
   };
+
   render() {
     const hidden =
       this.props.role === "owner" || this.props.role === "contributor"
         ? ""
         : "hidden";
     return (
-      <div className={`container--NewArticleButton ${hidden}`}>
-        <div className="NewArticleButton" onClick={() => this.handleClick()}>
+      <div className={`NewArticleButton--container ${hidden}`}>
+        <div className="NewArticleButton" onClick={this.handleClick}>
           Create New Article
         </div>
       </div>

@@ -10,8 +10,8 @@ class index extends Component {
 
     if (visibleModal === "login") return <LoginModal />;
     if (visibleModal === "register") return <RegistrationModal />;
-    else if (visibleModal === "submit") return <SubmitDraftModal />;
-    else return <></>;
+    if (visibleModal === "submit") return <SubmitDraftModal />;
+    return <></>;
   }
 }
 

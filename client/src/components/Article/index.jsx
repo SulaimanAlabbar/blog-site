@@ -1,21 +1,23 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actionCreators from "../../util/actionCreators";
-// import draftToHtml from "draftjs-to-html";
-import ReactHtmlParser from "react-html-parser";
+import { withRouter, Redirect } from "react-router-dom";
 import axios from "axios";
+import { QuillDeltaToHtmlConverter } from "quill-delta-to-html";
+import ReactHtmlParser from "react-html-parser";
+import * as actionCreators from "../../util/actionCreators";
 import Loader from "../Loader";
 import "./style.css";
-import { QuillDeltaToHtmlConverter } from "quill-delta-to-html";
-import { withRouter, Redirect } from "react-router-dom";
 
 class index extends Component {
+  isMounted = false;
+
   state = {
     loaded: false,
     falseArticleId: false
   };
 
   componentDidMount = async () => {
+    this.isMounted = true;
     (function smoothscroll() {
       const currentScroll =
         document.documentElement.scrollTop || document.body.scrollTop;
@@ -44,6 +46,10 @@ class index extends Component {
     }
   };
 
+  componentWillUnmount = () => {
+    this.isMounted = false;
+  };
+
   render() {
     const { loaded, falseArticleId } = this.state;
     const { currentArticle } = this.props;
@@ -54,10 +60,9 @@ class index extends Component {
           <Loader />
         </div>
       );
-    else if (falseArticleId) {
+    if (falseArticleId) {
       return <Redirect to="/" />;
-    } else
-      return (
+    } return (
         <div className="Article--container">
           <div className="Article--Article--header">
             <h1 className="Article--Article--title">

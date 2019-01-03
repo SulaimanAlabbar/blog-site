@@ -1,13 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actionCreators from "../../util/actionCreators";
 import axios from "axios";
+import * as actionCreators from "../../util/actionCreators";
 import "./style.css";
 
 class index extends Component {
+  isMounted = false;
+
   componentDidMount = async () => {
+    this.isMounted = true;
     const numOfArticles = await axios.get("/api/numOfArticles");
     this.props.setNumOfArticles(numOfArticles.data);
+  };
+
+  componentWillUnmount = () => {
+    this.isMounted = false;
   };
 
   clickHandler = async page => {
@@ -53,13 +60,13 @@ class index extends Component {
                   {index + 1}
                 </li>
               );
-            else if (!pagePopFlag) {
+            if (!pagePopFlag) {
               pagePopFlag = !pagePopFlag;
               return (
                 <li
                   className="PageButton"
                   key="popup"
-                  onClick={() => this.clickHandlerTwo()}
+                  onClick={this.clickHandlerTwo}
                 >
                   ...
                 </li>

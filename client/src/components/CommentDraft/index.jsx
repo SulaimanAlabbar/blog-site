@@ -6,11 +6,21 @@ import CommentDraft from "./CommentDraft";
 import "./style.css";
 
 class index extends Component {
+  isMounted = false;
+
   constructor(props) {
     super(props);
     this.state = { text: "" };
     this.quillRef = React.createRef();
   }
+
+  componentDidMount = () => {
+    this.isMounted = true;
+  };
+
+  componentWillUnmount = () => {
+    this.isMounted = false;
+  };
 
   handleDraftChange = value => {
     this.setState({ text: value });
@@ -25,7 +35,7 @@ class index extends Component {
       });
 
       if (!commentSubmitted.data) {
-        //console.log("Do something here")
+        // console.log("Do something here")
       } else {
         this.setState({ text: "" });
       }
@@ -47,8 +57,9 @@ class index extends Component {
         </div>
         <div className="CommentDraft--SubmitComment">
           <button
+            type="button"
             className="SubmitCommentButton"
-            onClick={() => this.submitComment()}
+            onClick={this.submitComment}
           >
             Submit Comment
           </button>
