@@ -22,8 +22,7 @@ module.exports = async (req, res) => {
       [req.params.id]
     );
 
-    if (response.rows.length === 0) return false;
-
+    if (response.rows.length === 0) return res.status(200).json(false);
     return res.status(200).json(response.rows[0]);
   } catch (error) {
     console.error(error);
