@@ -1,26 +1,19 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
+import { withRouter, Link } from "react-router-dom";
 import * as actionCreators from "../../util/actionCreators";
 import "./NewArticleButton.css";
 
-class NewArticleButton extends Component {
-  handleClick = () => {
-    this.props.setPage("DraftPage");
-  };
+function NewArticleButton({ role }) {
+  const hidden = role === "owner" || role === "contributor" ? "" : "hidden";
 
-  render() {
-    const hidden =
-      this.props.role === "owner" || this.props.role === "contributor"
-        ? ""
-        : "hidden";
-    return (
-      <div className={`NewArticleButton--container ${hidden}`}>
-        <div className="NewArticleButton" onClick={this.handleClick}>
-          Create New Article
-        </div>
-      </div>
-    );
-  }
+  return (
+    <div className={`NewArticleButton--container ${hidden}`}>
+      <Link to="/articleDraft">
+        <div className="NewArticleButton">Create New Article</div>
+      </Link>
+    </div>
+  );
 }
 
 const mapStateToProps = state => ({
@@ -29,7 +22,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = actionCreators;
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(NewArticleButton);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(NewArticleButton)
+);

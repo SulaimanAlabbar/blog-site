@@ -22,13 +22,16 @@ function MainPage({ location, role }) {
 
   if (location.pathname === "/") page = "MainPage";
   else if (location.pathname === "/0" || location.pathname === "/1")
-    page = "invalid";
-  else if (new RegExp("^/[0-9]*$").test(location.pathname)) page = "MainPage";
+    return <Redirect to="/" />;
+
+  if (new RegExp("^/[0-9]*$").test(location.pathname)) page = "MainPage";
   else if (new RegExp("^/article/[0-9]*$").test(location.pathname))
     page = "ArticlePage";
   else page = "invalid";
 
-  if (page === "invalid") return <Redirect to="/" />;
+  // console.log(page);
+
+  // if (page === "invalid" && ) return <Redirect to="/" />;
 
   return (
     <div

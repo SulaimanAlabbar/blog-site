@@ -12,8 +12,6 @@ class App extends Component {
   render() {
     return (
       <>
-        <MainPage />
-        <ModalHandler />
         <Route
           path="/articleDraft"
           exact
@@ -24,6 +22,8 @@ class App extends Component {
             </>
           )}
         />
+        <MainPage />
+        <ModalHandler />
       </>
     );
   }
