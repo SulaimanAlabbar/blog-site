@@ -1,9 +1,7 @@
-let db = require("../database/dbPool");
-
-module.exports = async (req, res) => {
-  const client = await db.pool.connect();
+module.exports = async (req, res, dbPool) => {
+  const client = await dbPool.connect();
   try {
-    //validate username and password
+    // validate username and password
 
     const response = await client.query(
       `select * from users where name = $1 and password = $2`,

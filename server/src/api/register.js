@@ -1,9 +1,7 @@
-let db = require("../database/dbPool");
-
-module.exports = async (req, res) => {
-  const client = await db.pool.connect();
+module.exports = async (req, res, dbPool) => {
+  const client = await dbPool.connect();
   try {
-    //validate username and password
+    // validate username and password
 
     let taken = { email: false, username: false };
 
@@ -12,21 +10,23 @@ module.exports = async (req, res) => {
       [req.body.email]
     );
 
-    if (emailTaken.rows.length !== 0)
+    if (emailTaken.rows.length !== 0) {
       taken = {
         ...taken,
         email: true
       };
+    }
 
     const usernameTaken = await client.query(
       `select * from users where name = $1`,
       [req.body.username]
     );
-    if (usernameTaken.rows.length !== 0)
+    if (usernameTaken.rows.length !== 0) {
       taken = {
         ...taken,
         username: true
       };
+    }
 
     if (
       JSON.stringify(taken) ===

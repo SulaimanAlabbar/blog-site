@@ -1,12 +1,11 @@
-let db = require("../database/dbPool");
 const validator = require("validator");
 
-module.exports = async (req, res) => {
+module.exports = async (req, res, dbPool) => {
   if (!validator.isJSON(JSON.stringify(req.body.articleContent))) {
     return res.status(200).json(false);
   }
 
-  const client = await db.pool.connect();
+  const client = await dbPool.connect();
 
   try {
     await client.query(

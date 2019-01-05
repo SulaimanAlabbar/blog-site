@@ -3,6 +3,6 @@ client/package-lock.json
 server/node_modules
 server/package-lock.json
 log.txt
-server/src/database/dbConfig.json
 server/public/
 client/build/
+server/.env

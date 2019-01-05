@@ -1,7 +1,5 @@
-let db = require("../database/dbPool");
-
-module.exports = async (req, res) => {
-  const client = await db.pool.connect();
+module.exports = async (req, res, dbPool) => {
+  const client = await dbPool.connect();
   try {
     const response = await client.query(
       `select distinct
