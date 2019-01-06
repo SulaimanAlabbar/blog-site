@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Route, Redirect, withRouter } from "react-router";
+import { Route, Redirect, withRouter } from "react-router-dom";
 import * as actionCreators from "../../util/actionCreators";
 import SearchPanel from "../../components/SearchPanel";
 import Description from "../../components/Description";

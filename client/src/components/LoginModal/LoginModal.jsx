@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import axios from "axios";
 import LoginForm from "./LoginForm";
 import Loader from "../Loader";
-import LoginSuccess from "./LoginSuccess";
 import * as actionCreators from "../../util/actionCreators";
 import "./LoginModal.css";
 
@@ -106,7 +105,7 @@ class LoginModal extends Component {
       return (
         <>
           <div className={`LoginModal--modal${modalClosed} ${modalSuccess}`}>
-            <LoginSuccess />
+            <h1 className="LoginSuccess">Login Success</h1>
           </div>
           <div
             className={`LoginModal--shade${modalClosed}`}

@@ -8,7 +8,8 @@ import {
   SET_COMMENT_DRAFT_CONTENT,
   SET_NUM_ARTICLES,
   SET_ARTICLES,
-  SET_CURRENT_ARTICLE
+  SET_CURRENT_ARTICLE,
+  SET_COMMENTS
 } from "./actions";
 
 const initialState = {
@@ -89,6 +90,12 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         currentArticle: payload
+      };
+
+    case SET_COMMENTS:
+      return {
+        ...state,
+        comments: payload
       };
 
     default:

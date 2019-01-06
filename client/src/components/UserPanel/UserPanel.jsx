@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
-import UserPanelButton from "./UserPanelButton";
-import UserPanelAvatar from "./UserPanelAvatar";
+import Button from "../Button";
 import * as actionCreators from "../../util/actionCreators";
 import "./UserPanel.css";
 
@@ -71,20 +70,24 @@ class UserPanel extends Component {
     if (role === "guest") {
       return (
         <div className="UserPanel--container">
-          <UserPanelButton text="Login" onClick={this.handleLogin} />
-          <UserPanelButton text="Register" onClick={this.handleRegister} />
+          <Button text="Login" width="100px" onClick={this.handleLogin} />
+          <Button text="Register" width="100px" onClick={this.handleRegister} />
         </div>
       );
     }
     return (
       <div className="UserPanel--logged--container">
         <div className={`UserPanel--logged--avatar${closed}`}>
-          <UserPanelAvatar avatar={avatar} />
+          <img src={avatar} alt="avatar" className="UserPanelAvatar" />;
         </div>
         <div className="UserPanel--logged--buttons--name">
           <div className={`UserPanel--logged--buttons${closed}`}>
-            <UserPanelButton text="Logout" onClick={this.handleLogout} />
-            <UserPanelButton text="Settings" onClick={this.handleSettings} />
+            <Button text="Logout" width="100px" onClick={this.handleLogout} />
+            <Button
+              text="Settings"
+              width="100px"
+              onClick={this.handleSettings}
+            />
           </div>
           <h2 className={`UserPanel--logged--name${closed}`}>{name}</h2>
         </div>

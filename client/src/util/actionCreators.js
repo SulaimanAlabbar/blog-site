@@ -8,7 +8,8 @@ import {
   SET_COMMENT_DRAFT_CONTENT,
   SET_NUM_ARTICLES,
   SET_ARTICLES,
-  SET_CURRENT_ARTICLE
+  SET_CURRENT_ARTICLE,
+  SET_COMMENTS
 } from "./actions";
 
 export const setVisibleModal = modal => ({
@@ -59,4 +60,9 @@ export const setArticles = articles => ({
 export const setCurrentArticle = article => ({
   type: SET_CURRENT_ARTICLE,
   payload: article
+});
+
+export const setComments = comments => ({
+  type: SET_COMMENTS,
+  payload: comments
 });

@@ -11,8 +11,7 @@ class Comments extends Component {
   _mounted = false;
 
   state = {
-    loaded: false,
-    comments: []
+    loaded: false
   };
 
   componentDidMount = () => {
@@ -21,6 +20,7 @@ class Comments extends Component {
 
   componentWillUnmount = () => {
     this._mounted = false;
+    this.props.setComments([]);
   };
 
   componentDidUpdate = async prevProps => {
@@ -36,9 +36,9 @@ class Comments extends Component {
         if (!this._mounted) return;
 
         if (comments.data) {
+          this.props.setComments(comments.data);
           this.setState({
-            loaded: true,
-            comments: comments.data
+            loaded: true
           });
         } else {
           this.setState({
@@ -52,7 +52,8 @@ class Comments extends Component {
   };
 
   render() {
-    const { loaded, comments } = this.state;
+    const { loaded } = this.state;
+    const { comments } = this.props;
     if (!loaded)
       return (
         <div className="container--loader--big">
@@ -91,7 +92,8 @@ class Comments extends Component {
 }
 
 const mapStateToProps = state => ({
-  currentArticle: state.currentArticle
+  currentArticle: state.currentArticle,
+  comments: state.comments
 });
 
 const mapDispatchToProps = actionCreators;

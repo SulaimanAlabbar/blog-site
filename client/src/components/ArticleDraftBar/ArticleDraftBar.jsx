@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import * as actionCreators from "../../util/actionCreators";
+import Button from "../Button";
 import "./ArticleDraftBar.css";
 
 function ArticleDraftBar({ setDraftTitle, submitDraft }) {
@@ -21,7 +22,7 @@ function ArticleDraftBar({ setDraftTitle, submitDraft }) {
         setDraftTitle(title.title);
         submitDraft(true);
       }}
-      render={() => (
+      render={formProps => (
         <Form className="DraftBar--container">
           <Field
             name="title"
@@ -36,9 +37,13 @@ function ArticleDraftBar({ setDraftTitle, submitDraft }) {
             component="div"
             className="field-error DraftBar--error"
           />
-          <button type="submit" className="SubmitDraftButton">
-            Submit Draft
-          </button>
+          <div className="SubmitDraftButton">
+            <Button
+              text="Submit Draft"
+              width="170px"
+              onClick={formProps.submitForm}
+            />
+          </div>
         </Form>
       )}
     />

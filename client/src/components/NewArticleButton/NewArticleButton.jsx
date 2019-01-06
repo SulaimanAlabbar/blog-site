@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { withRouter, Link } from "react-router-dom";
 import * as actionCreators from "../../util/actionCreators";
+import Button from "../Button";
 import "./NewArticleButton.css";
 
 function NewArticleButton({ role }) {
@@ -10,7 +11,7 @@ function NewArticleButton({ role }) {
   return (
     <div className={`NewArticleButton--container ${hidden}`}>
       <Link to="/articleDraft">
-        <div className="NewArticleButton">Create New Article</div>
+        <Button width="170px" text="Create New Article" />
       </Link>
     </div>
   );

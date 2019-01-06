@@ -1,17 +1,11 @@
-.container--HomeFromDraftButton {
-  position: fixed;
-  z-index: 100;
-  bottom: 0;
-  right: 11px;
-}
-
-.HomeFromDraftButton {
+.Button--container {
   margin: 0 5px;
   font-size: 1.2rem;
   color: white;
   background-color: black;
   height: 40px;
-  width: 170px;
+  /* width: 170px; */
+  width: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,7 +21,7 @@
   transition-duration: 0.3s;
 }
 
-.HomeFromDraftButton:before {
+.Button--container:before {
   content: "";
   position: absolute;
   z-index: -1;
@@ -47,14 +41,14 @@
   -webkit-transition-timing-function: ease-out;
   transition-timing-function: ease-out;
 }
-.HomeFromDraftButton:hover,
-.HomeFromDraftButton:focus,
-.HomeFromDraftButton:active {
+.Button--container:hover,
+.Button--container:focus,
+.Button--container:active {
   color: black;
 }
-.HomeFromDraftButton:hover:before,
-.HomeFromDraftButton:focus:before,
-.HomeFromDraftButton:active:before {
+.Button--container:hover:before,
+.Button--container:focus:before,
+.Button--container:active:before {
   -webkit-transform: scaleX(1);
   transform: scaleX(1);
   color: yellow;
