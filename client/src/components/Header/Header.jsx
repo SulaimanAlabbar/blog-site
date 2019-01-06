@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { withRouter, Link } from "react-router-dom";
 import axios from "axios";
 import Loader from "../Loader";
-import Banner from "./Banner";
 import "./Header.css";
 
 class Header extends Component {

@@ -1,3 +1,5 @@
+const bcrypt = require("bcryptjs");
+
 module.exports = async (req, res, dbPool) => {
   const client = await dbPool.connect();
   try {
@@ -32,9 +34,11 @@ module.exports = async (req, res, dbPool) => {
       JSON.stringify(taken) ===
       JSON.stringify({ email: false, username: false })
     ) {
+      const hashedPassword = await bcrypt.hash(req.body.password, 10);
+
       const response = await client.query(
         `insert into users (email, name, password) values ($1, $2, $3)`,
-        [req.body.email, req.body.username, req.body.password]
+        [req.body.email, req.body.username, hashedPassword]
       );
 
       return res.status(200).json(true);

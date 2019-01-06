@@ -14,6 +14,7 @@ class RegistrationModal extends Component {
     loaded: true,
     email: "",
     username: "",
+    password: "",
     dateOfBirth: "",
     country: "country",
     RegistrationSuccess: false,
@@ -48,6 +49,7 @@ class RegistrationModal extends Component {
         loaded: false,
         email: values.email,
         username: values.username,
+        password: values.password,
         dateOfBirth: values.dateOfBirth,
         country: values.country
       },
