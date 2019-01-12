@@ -30,11 +30,14 @@ class CommentDraft extends Component {
 
   submitComment = async () => {
     try {
-      const commentSubmitted = await axios.post("/api/submitComment", {
-        authorId: this.props.authorId,
-        articleId: this.props.currentArticle.article_id,
-        comment: this.quillRef.current.getEditor().getContents()
-      });
+      const commentSubmitted = await axios.post(
+        process.env.REACT_APP_SUBMIT_COMMENT,
+        {
+          authorId: this.props.authorId,
+          articleId: this.props.currentArticle.article_id,
+          comment: this.quillRef.current.getEditor().getContents()
+        }
+      );
 
       if (!this._mounted) return;
 
@@ -43,7 +46,8 @@ class CommentDraft extends Component {
       } else {
         this.setState({ text: "" });
         const comments = await axios.get(
-          `/api/comments/${this.props.currentArticle.article_id}-${0}`
+          `${process.env.REACT_APP_COMMENTS 
+            }${this.props.currentArticle.article_id}-${0}`
         );
 
         if (!this._mounted) return;

@@ -22,7 +22,7 @@ class Articles extends Component {
     try {
       const { pageNum } = this.props;
       const page = typeof pageNum === "boolean" ? 0 : (Number(pageNum) - 1) * 5;
-      const articles = await axios.get(`/api/articles/${page}`);
+      const articles = await axios.get(process.env.REACT_APP_ARTICLES + page);
 
       if (!this._mounted) return;
 

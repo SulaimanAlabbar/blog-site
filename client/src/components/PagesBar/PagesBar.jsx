@@ -9,7 +9,9 @@ class PagesBar extends Component {
 
   componentDidMount = async () => {
     this._mounted = true;
-    const numOfArticles = await axios.get("/api/numOfArticles");
+    const numOfArticles = await axios.get(
+      process.env.REACT_APP_NUM_OF_ARTICLES
+    );
     this.props.setNumOfArticles(numOfArticles.data);
   };
 
@@ -28,7 +30,9 @@ class PagesBar extends Component {
     })();
 
     try {
-      const articles = await axios.get(`/api/articles/${page * 5}`);
+      const articles = await axios.get(
+        process.env.REACT_APP_ARTICLES + page * 5
+      );
       this.props.setArticles(articles.data);
     } catch (error) {
       console.error(error);

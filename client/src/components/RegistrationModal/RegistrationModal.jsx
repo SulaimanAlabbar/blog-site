@@ -55,15 +55,18 @@ class RegistrationModal extends Component {
       },
       async () => {
         try {
-          const registerInfo = await axios.post("/api/register", {
-            email: this.state.email,
-            username: this.state.username,
-            password: this.state.password,
-            confirmPassword: this.state.confirmPassword,
-            dateOfBirth: this.state.dateOfBirth,
-            country: this.state.country,
-            termsOfServices: this.state.termsOfServices
-          });
+          const registerInfo = await axios.post(
+            process.env.REACT_APP_REGISTER,
+            {
+              email: this.state.email,
+              username: this.state.username,
+              password: this.state.password,
+              confirmPassword: this.state.confirmPassword,
+              dateOfBirth: this.state.dateOfBirth,
+              country: this.state.country,
+              termsOfServices: this.state.termsOfServices
+            }
+          );
 
           if (typeof registerInfo.data !== "boolean") {
             this.setState({

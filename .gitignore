@@ -6,3 +6,4 @@ log.txt
 server/public/
 client/build/
 server/.env
+client/.env

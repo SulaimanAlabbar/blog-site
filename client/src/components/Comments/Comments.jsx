@@ -30,7 +30,8 @@ class Comments extends Component {
     ) {
       try {
         const comments = await axios.get(
-          `/api/comments/${this.props.currentArticle.article_id}-${0}`
+          `${process.env.REACT_APP_COMMENTS 
+            }${this.props.currentArticle.article_id}-${0}`
         );
 
         if (!this._mounted) return;

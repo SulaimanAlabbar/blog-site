@@ -50,7 +50,7 @@ class LoginModal extends Component {
       },
       async () => {
         try {
-          const loginInfo = await axios.post("/api/login", {
+          const loginInfo = await axios.post(process.env.REACT_APP_LOGIN, {
             username: this.state.username,
             password: this.state.password
           });

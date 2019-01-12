@@ -55,7 +55,7 @@ class UserPanel extends Component {
     );
 
     try {
-      axios.get("/api/logout");
+      axios.get(process.env.REACT_APP_LOGOUT);
     } catch (error) {
       console.error(error);
     }

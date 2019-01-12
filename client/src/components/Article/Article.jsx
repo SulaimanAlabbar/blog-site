@@ -29,7 +29,9 @@ class Article extends Component {
     })();
 
     try {
-      const article = await axios.get(`/api/article/${this.props.articleId}`);
+      const article = await axios.get(
+        process.env.REACT_APP_ARTICLE + this.props.articleId
+      );
 
       if (!this._mounted) return;
 

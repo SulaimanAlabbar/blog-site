@@ -14,7 +14,7 @@ export default class Description extends Component {
   componentDidMount = async () => {
     this._mounted = true;
     try {
-      const blogInfo = await axios.get("/api/blogInfo");
+      const blogInfo = await axios.get(process.env.REACT_APP_BLOG_INFO);
       this.setState({
         loaded: true,
         name: blogInfo.data.name,

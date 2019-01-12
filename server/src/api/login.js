@@ -3,8 +3,6 @@ const bcrypt = require("bcryptjs");
 module.exports = async (req, res, dbPool) => {
   const client = await dbPool.connect();
   try {
-    // validate username and password
-
     const response = await client.query(`select * from users where name = $1`, [
       req.body.username
     ]);

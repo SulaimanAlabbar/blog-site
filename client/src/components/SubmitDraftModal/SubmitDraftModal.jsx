@@ -19,11 +19,14 @@ class SubmitDraftModal extends Component {
   componentDidMount = async () => {
     const { id, draftTitle, draftContent } = this.props;
     try {
-      const submitInfo = await axios.post("/api/submitDraft", {
-        authorId: id,
-        articleTitle: draftTitle,
-        articleContent: draftContent
-      });
+      const submitInfo = await axios.post(
+        process.env.REACT_APP_SUBMIT_ARTICLE,
+        {
+          authorId: id,
+          articleTitle: draftTitle,
+          articleContent: draftContent
+        }
+      );
 
       this.setState(
         prevState => ({
