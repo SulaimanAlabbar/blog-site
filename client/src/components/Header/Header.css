@@ -1,0 +1,8 @@
+.Banner--container {
+  animation: fadein 2s;
+  margin: 0;
+}
+
+.Banner--image {
+  /* width: 100%; */
+}

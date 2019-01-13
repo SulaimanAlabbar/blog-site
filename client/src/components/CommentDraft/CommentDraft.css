@@ -1,0 +1,30 @@
+.CommentDraft--container {
+  height: 200px;
+  overflow: none;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+}
+
+.CommentDraft--header {
+  order: 1;
+  margin-left: 15px;
+}
+
+.CommentDraft--CommentDraft {
+  order: 2;
+  height: 100%;
+  border: 1px gray solid;
+}
+
+.CommentDraft--SubmitComment {
+  order: 3;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.SubmitCommentButton {
+  order: 3;
+  margin: 0 5px;
+}

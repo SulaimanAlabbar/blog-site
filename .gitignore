@@ -1,0 +1,11 @@
+client/node_modules
+server/node_modules
+client/.env
+server/.env
+client/package-lock.json
+server/package-lock.json
+client/build/
+server/public/
+server/src/api/unfinished/
+server/src/database/
+log.txt
