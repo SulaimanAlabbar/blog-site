@@ -7,3 +7,4 @@ server/public/
 client/build/
 server/.env
 client/.env
+server/src/api/unfinished

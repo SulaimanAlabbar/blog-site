@@ -39,7 +39,6 @@ export default (state = initialState, { type, payload }) => {
         name: payload.name,
         email: payload.email,
         avatar: payload.avatar,
-        joined: payload.joined,
         role: payload.role,
         loggedIn: true
       };

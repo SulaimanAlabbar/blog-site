@@ -45,7 +45,6 @@ class UserPanel extends Component {
                 name: null,
                 email: null,
                 avatar: null,
-                joined: null,
                 role: "guest"
               });
             }
@@ -55,7 +54,7 @@ class UserPanel extends Component {
     );
 
     try {
-      axios.get(process.env.REACT_APP_LOGOUT);
+      axios.post(process.env.REACT_APP_LOGOUT);
     } catch (error) {
       console.error(error);
     }
