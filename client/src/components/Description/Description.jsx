@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import React, { Component } from "react";
 import axios from "axios";
 import Loader from "../Loader";
@@ -42,7 +43,15 @@ export default class Description extends Component {
       <div className="Description--container">
         <div className="Description--top">
           <h2 className="Description--name">{name}</h2>
-          <img className="Description--avatar" src={avatar} alt="avatar" />
+          <img
+            className="Description--avatar"
+            src={
+              avatar !== "Default Avatar Image URL"
+                ? avatar
+                : require("../../app/images/defaultAvatar.png")
+            }
+            alt="avatar"
+          />
         </div>
         <p className="Description--description">{description}</p>
       </div>

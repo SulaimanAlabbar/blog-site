@@ -33,7 +33,6 @@ class CommentDraft extends Component {
       const commentSubmitted = await axios.post(
         process.env.REACT_APP_SUBMIT_COMMENT,
         {
-          authorId: this.props.authorId,
           articleId: this.props.currentArticle.article_id,
           comment: this.quillRef.current.getEditor().getContents()
         }
@@ -87,7 +86,6 @@ class CommentDraft extends Component {
 }
 
 const mapStateToProps = state => ({
-  authorId: state.id,
   currentArticle: state.currentArticle
 });
 

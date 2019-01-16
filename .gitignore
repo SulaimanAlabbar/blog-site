@@ -8,4 +8,5 @@ client/build/
 server/public/
 server/src/api/unfinished/
 server/src/database/
+server/logs
 log.txt

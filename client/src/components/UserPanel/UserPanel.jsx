@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
@@ -77,7 +78,16 @@ class UserPanel extends Component {
     return (
       <div className="UserPanel--logged--container">
         <div className={`UserPanel--logged--avatar${closed}`}>
-          <img src={avatar} alt="avatar" className="UserPanelAvatar" />;
+          <img
+            src={
+              avatar !== "Default Avatar Image URL"
+                ? avatar
+                : require("../../app/images/defaultAvatar.png")
+            }
+            alt="avatar"
+            className="UserPanelAvatar"
+          />
+          ;
         </div>
         <div className="UserPanel--logged--buttons--name">
           <div className={`UserPanel--logged--buttons${closed}`}>

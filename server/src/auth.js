@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 
 module.exports = async (passport, dbPool) => {
   passport.use(
-    new LocalStrategy(async (username, password, cb) => {
+    new LocalStrategy(async (username, password, done) => {
       const client = await dbPool.connect();
       try {
         const response = await client.query(
@@ -11,38 +11,37 @@ module.exports = async (passport, dbPool) => {
           [username]
         );
 
-        if (response.rows.length === 0) return cb(null, false);
+        if (response.rows.length === 0) return done(null, false);
 
         const passwordCorrect = await bcrypt.compare(
           password,
           response.rows[0].password
         );
 
-        if (!passwordCorrect) return cb(null, false);
-        else return cb(null, response.rows[0]);
-        // don't return password
+        if (!passwordCorrect) return done(null, false);
+        else return done(null, response.rows[0]);
       } catch (error) {
         console.error(error);
-        return cb(error);
+        return done(error);
       } finally {
         await client.release();
       }
     })
   );
 
-  passport.serializeUser((user, cb) => cb(null, user.id));
+  passport.serializeUser((user, done) => done(null, user.id));
 
-  passport.deserializeUser(async (id, cb) => {
+  passport.deserializeUser(async (id, done) => {
     const client = await dbPool.connect();
     try {
       const response = await client.query(`select * from users where id = $1`, [
         id
       ]);
 
-      if (response.rows.length !== 0) cb(null, response.rows[0]);
+      if (response.rows.length !== 0) done(null, response.rows[0]);
     } catch (error) {
       console.error(error);
-      return cb(error);
+      return done(error);
     } finally {
       await client.release();
     }

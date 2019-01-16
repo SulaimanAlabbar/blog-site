@@ -17,12 +17,11 @@ class SubmitDraftModal extends Component {
   }
 
   componentDidMount = async () => {
-    const { id, draftTitle, draftContent } = this.props;
+    const { draftTitle, draftContent } = this.props;
     try {
       const submitInfo = await axios.post(
         process.env.REACT_APP_SUBMIT_ARTICLE,
         {
-          authorId: id,
           articleTitle: draftTitle,
           articleContent: draftContent
         }
@@ -133,7 +132,6 @@ class SubmitDraftModal extends Component {
 const mapDispatchToProps = actionCreators;
 
 const mapStateToProps = state => ({
-  id: state.id,
   draftTitle: state.draftTitle,
   draftContent: state.draftContent
 });

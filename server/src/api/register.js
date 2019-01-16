@@ -1,10 +1,37 @@
 const bcrypt = require("bcryptjs");
+const Joi = require("joi");
+const countries = require("../countries");
 
 module.exports = async (req, res, dbPool) => {
+  const schema = Joi.object().keys({
+    email: Joi.string()
+      .email()
+      .required(),
+    username: Joi.string()
+      .min(3)
+      .max(20)
+      .required(),
+    password: Joi.string()
+      .min(6)
+      .max(30)
+      .regex(/[a-z]/)
+      .regex(/[A-Z]/)
+      .regex(/\d+/)
+      .required(),
+    dateOfBirth: Joi.date()
+      .min("1-1-1920")
+      .max(new Date(new Date().setFullYear(new Date().getFullYear() - 13)))
+      .required(),
+    country: Joi.any()
+      .valid(countries)
+      .required()
+  });
+
+  const validBody = Joi.validate(req.body, schema);
+  if (validBody.error !== null) return res.status(404).end();
+
   const client = await dbPool.connect();
   try {
-    // validate username and password
-
     let taken = { email: false, username: false };
 
     const emailTaken = await client.query(
@@ -36,7 +63,7 @@ module.exports = async (req, res, dbPool) => {
     ) {
       const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
-      const response = await client.query(
+      await client.query(
         `insert into users (email, name, password) values ($1, $2, $3)`,
         [req.body.email, req.body.username, hashedPassword]
       );

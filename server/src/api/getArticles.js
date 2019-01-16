@@ -14,7 +14,7 @@ module.exports = async (req, res, dbPool) => {
   
   from articles, users
   where articles.author_id = users.id
-  order by articles.created
+  order by articles.created desc
   limit 5 offset $1`,
       [req.params.from]
     );

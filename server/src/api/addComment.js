@@ -1,16 +1,26 @@
-const validator = require("validator");
+const Joi = require("joi");
 
 module.exports = async (req, res, dbPool) => {
-  if (!validator.isJSON(JSON.stringify(req.body.comment))) {
-    return res.status(200).json(false);
-  }
+  const schema = Joi.object().keys({
+    articleId: Joi.number()
+      .integer()
+      .positive()
+      .required(),
+    comment: Joi.object().required()
+  });
+
+  const validBody = Joi.validate(req.body, schema);
+  if (validBody.error !== null) return res.status(404).end();
 
   const client = await dbPool.connect();
-
   try {
     await client.query(
       `insert into comments (content, article_id, author_id) values ($1, $2, $3)`,
-      [JSON.stringify(req.body.comment), req.body.articleId, req.body.authorId]
+      [
+        JSON.stringify(req.body.comment),
+        req.body.articleId,
+        Number(req.user.id)
+      ]
     );
 
     return res.status(200).json(true);

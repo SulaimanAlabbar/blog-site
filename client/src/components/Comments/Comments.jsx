@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
@@ -30,8 +31,9 @@ class Comments extends Component {
     ) {
       try {
         const comments = await axios.get(
-          `${process.env.REACT_APP_COMMENTS 
-            }${this.props.currentArticle.article_id}-${0}`
+          `${process.env.REACT_APP_COMMENTS}${
+            this.props.currentArticle.article_id
+          }-${0}`
         );
 
         if (!this._mounted) return;
@@ -68,7 +70,11 @@ class Comments extends Component {
             <li className="Comments--Comment--container" key={i}>
               <div className="Comments--Comment--header">
                 <img
-                  src={comment.author_avatar}
+                  src={
+                    comment.author_avatar !== "Default Avatar Image URL"
+                      ? comment.author_avatar
+                      : require("../../app/images/defaultAvatar.png")
+                  }
                   alt="userAvatar"
                   className="Comments--Comment--avatar"
                 />

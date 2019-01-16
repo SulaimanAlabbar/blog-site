@@ -61,10 +61,8 @@ class RegistrationModal extends Component {
               email: this.state.email,
               username: this.state.username,
               password: this.state.password,
-              confirmPassword: this.state.confirmPassword,
               dateOfBirth: this.state.dateOfBirth,
-              country: this.state.country,
-              termsOfServices: this.state.termsOfServices
+              country: this.state.country
             }
           );
 
