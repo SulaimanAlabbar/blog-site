@@ -9,7 +9,8 @@ import {
   SET_NUM_ARTICLES,
   SET_ARTICLES,
   SET_CURRENT_ARTICLE,
-  SET_COMMENTS
+  SET_COMMENTS,
+  GOTO_HOME
 } from "./actions";
 
 const initialState = {
@@ -22,7 +23,8 @@ const initialState = {
   numOfArticles: null,
   articles: [],
   comments: [],
-  currentArticle: null
+  currentArticle: null,
+  gotoHome: false
 };
 
 export default (state = initialState, { type, payload }) => {
@@ -95,6 +97,12 @@ export default (state = initialState, { type, payload }) => {
       return {
         ...state,
         comments: payload
+      };
+
+    case GOTO_HOME:
+      return {
+        ...state,
+        gotoHome: payload
       };
 
     default:

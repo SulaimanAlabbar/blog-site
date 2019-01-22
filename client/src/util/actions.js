@@ -9,3 +9,4 @@ export const SET_NUM_ARTICLES = "SET_NUM_ARTICLES";
 export const SET_ARTICLES = "SET_ARTICLES";
 export const SET_CURRENT_ARTICLE = "SET_CURRENT_ARTICLE";
 export const SET_COMMENTS = "SET_COMMENTS";
+export const GOTO_HOME = "GOTO_HOME";

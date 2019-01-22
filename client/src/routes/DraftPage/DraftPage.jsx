@@ -1,11 +1,18 @@
 import React from "react";
-import { Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { Link, Redirect, withRouter } from "react-router-dom";
 import ArticleDraft from "../../components/ArticleDraft";
 import ArticleDraftBar from "../../components/ArticleDraftBar";
 import Button from "../../components/Button";
+import * as actionCreators from "../../util/actionCreators";
 import "./DraftPage.css";
 
-function DraftPage() {
+function DraftPage({ goHome, gotoHome }) {
+  if (goHome) {
+    gotoHome(false);
+    return <Redirect to="/" />;
+  }
+
   return (
     <div className="DraftPage--container pt-page-scaleUpDown">
       <div className="DraftPage--DraftBar">
@@ -23,4 +30,15 @@ function DraftPage() {
   );
 }
 
-export default withRouter(DraftPage);
+const mapStateToProps = state => ({
+  goHome: state.gotoHome
+});
+
+const mapDispatchToProps = actionCreators;
+
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(DraftPage)
+);

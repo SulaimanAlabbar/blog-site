@@ -5,6 +5,7 @@ const fs = require("fs");
 const path = require("path");
 const express = require("express");
 const helmet = require("helmet");
+const compression = require("compression");
 // const csrf = require("csurf");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
@@ -76,6 +77,8 @@ process.on("warning", warning => {
 auth(passport, dbPool);
 
 const server = express();
+server.use(helmet());
+server.use(compression());
 server.use(express.static("public"));
 
 // server.use(morgan("combined"));
@@ -83,8 +86,6 @@ server.use(express.static("public"));
 server.use(cookieParser());
 server.use(bodyParser.json({ limit: "50mb" }));
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
-
-server.use(helmet());
 
 // server.use(csrf());
 
@@ -107,14 +108,6 @@ server.use(
 
 server.use(passport.initialize());
 server.use(passport.session());
-
-// passport.authenticate('local', { failureFlash: 'Invalid username or password.' });
-
-// req.isAuthenticated()
-
-// server.get('/some_path',checkAuthentication,function(req,res){
-//   //do something only if user is authenticated
-// });
 
 function checkAuthentication (req, res, next) {
   if (req.isAuthenticated()) next();
@@ -151,4 +144,7 @@ server.get("/api/numOfArticles", (req, res) =>
 //   res.status(404).send({ url: req.originalUrl + " not found" });
 // });
 
-server.listen(port, () => console.log(`Server started on port ${port}`));
+server.listen(port, () =>
+  console.log(`Server running in ${server.get("env")} mode on port ${port}`)
+);
+// NODE_ENV=production

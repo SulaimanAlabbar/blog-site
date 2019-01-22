@@ -14,7 +14,6 @@ class LoginModal extends Component {
     loaded: true,
     username: "",
     password: "",
-    // remember: false,
     loginFail: false,
     loginSuccess: false
   };
@@ -46,7 +45,6 @@ class LoginModal extends Component {
         loaded: false,
         username: values.username,
         password: values.password
-        //    remember: values.remember
       },
       async () => {
         try {

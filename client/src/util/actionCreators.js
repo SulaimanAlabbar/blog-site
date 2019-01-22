@@ -9,7 +9,8 @@ import {
   SET_NUM_ARTICLES,
   SET_ARTICLES,
   SET_CURRENT_ARTICLE,
-  SET_COMMENTS
+  SET_COMMENTS,
+  GOTO_HOME
 } from "./actions";
 
 export const setVisibleModal = modal => ({
@@ -65,4 +66,9 @@ export const setCurrentArticle = article => ({
 export const setComments = comments => ({
   type: SET_COMMENTS,
   payload: comments
+});
+
+export const gotoHome = goto => ({
+  type: GOTO_HOME,
+  payload: goto
 });

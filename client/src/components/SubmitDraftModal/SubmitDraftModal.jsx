@@ -46,7 +46,7 @@ class SubmitDraftModal extends Component {
                   this.props.setDraftTitle("");
                   this.props.setDraftContent("");
                   this.props.submitDraft(false);
-                  if (submitInfo.data !== false) this.props.setPage("MainPage");
+                  this.props.gotoHome(true);
                 }, 400);
               }
             );

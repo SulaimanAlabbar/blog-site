@@ -14,6 +14,13 @@ module.exports = async (req, res, dbPool) => {
 
   const client = await dbPool.connect();
   try {
+    const response = await client.query(
+      `select * from comments where article_id = $1`,
+      [req.body.articleId]
+    );
+
+    if (response.rows.length === 0) return res.status(400).end();
+
     await client.query(
       `insert into comments (content, article_id, author_id) values ($1, $2, $3)`,
       [
