@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { NavLink, withRouter } from "react-router-dom";
 import axios from "axios";
+import uuidv4 from "uuid/v4";
 import * as actionCreators from "../../util/actionCreators";
 import "./style.css";
 
@@ -56,13 +58,14 @@ class PagesBar extends Component {
           {new Array(numOfPages).fill(0).map((page, index) => {
             if (index <= 9 || index === numOfPages - 1)
               return (
-                <li
+                <NavLink
+                  to={`/${index + 1}`}
                   className="PageButton"
-                  key={index}
+                  key={uuidv4()}
                   onClick={() => this.clickHandler(index)}
                 >
                   {index + 1}
-                </li>
+                </NavLink>
               );
             if (!pagePopFlag) {
               pagePopFlag = !pagePopFlag;
@@ -89,7 +92,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = actionCreators;
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PagesBar);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(PagesBar)
+);

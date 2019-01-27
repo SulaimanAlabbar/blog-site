@@ -1,8 +1,8 @@
-require("dotenv").config();
+const path = require("path");
+require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
 const { createLogger, format, transports } = require("winston");
 require("winston-daily-rotate-file");
 const fs = require("fs");
-const path = require("path");
 const express = require("express");
 const helmet = require("helmet");
 const compression = require("compression");
@@ -23,14 +23,15 @@ const getArticles = require("./api/getArticles");
 const getComments = require("./api/getComments");
 const getArticle = require("./api/getArticle");
 const auth = require("./auth");
-const logDir = "./logs";
+const logDir = "../logs";
 const port = process.env.PORT || 4000;
+
 const dbPool = new Pool({
-  user: process.env.DB_USER,
   host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
   database: process.env.DB_DATABASE,
-  password: process.env.DB_PASSWORD,
-  port: process.env.DB_PORT
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD
 });
 
 dbPool.on("error", err => {
@@ -60,19 +61,19 @@ const logger = createLogger({
   transports: [new transports.File({ filename }), dailyRotateFileTransport]
 });
 
-process.on("uncaughtException", error => {
-  logger.log("error", error);
-  process.exit(-1);
-});
+// process.on("uncaughtException", error => {
+//   logger.log("error", error);
+//   process.exit(-1);
+// });
 
-process.on("unhandledRejection", error => {
-  logger.log("error", error);
-  process.exit(-1);
-});
+// process.on("unhandledRejection", error => {
+//   logger.log("error", error);
+//   process.exit(-1);
+// });
 
-process.on("warning", warning => {
-  logger.log("warning", warning);
-});
+// process.on("warning", warning => {
+//   logger.log("warning", warning);
+// });
 
 auth(passport, dbPool);
 

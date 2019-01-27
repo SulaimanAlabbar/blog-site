@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Route, Redirect, withRouter } from "react-router-dom";
+import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import * as actionCreators from "../../util/actionCreators";
 import SearchPanel from "../../components/SearchPanel";
 import Description from "../../components/Description";
@@ -29,8 +29,6 @@ function MainPage({ location, role }) {
     page = "ArticlePage";
   else page = "invalid";
 
-  // console.log(page);
-
   // if (page === "invalid" && ) return <Redirect to="/" />;
 
   return (
@@ -48,26 +46,28 @@ function MainPage({ location, role }) {
       <div className={`${page}--SocialPanel`}>
         <SocialMedia />
       </div>
-      <Route
-        key="notPaged"
-        exact
-        path="/"
-        render={() => (
-          <div className={`${page}--Articles`}>
-            <Articles pageNum={false} />
-          </div>
-        )}
-      />
-      <Route
-        key="paged"
-        exact
-        path="/:pageNum"
-        render={props => (
-          <div className={`${page}--Articles`}>
-            <Articles pageNum={props.match.params.pageNum} />
-          </div>
-        )}
-      />
+      <Switch>
+        <Route
+          key="notPaged"
+          exact
+          path="/"
+          render={() => (
+            <div className={`${page}--Articles`}>
+              <Articles pageNum={0} />
+            </div>
+          )}
+        />
+        <Route
+          key="paged"
+          exact
+          path="/:pageNum"
+          render={props => (
+            <div className={`${page}--Articles`}>
+              <Articles pageNum={props.match.params.pageNum} />
+            </div>
+          )}
+        />
+      </Switch>
       <Route
         exact
         path="/article/:articleId"

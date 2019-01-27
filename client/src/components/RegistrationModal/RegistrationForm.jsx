@@ -160,8 +160,8 @@ export default function RegistrationForm({
                     <option key="default" disabled="disabled" value="country">
                       Country
                     </option>,
-                    countries.map(country => (
-                      <option value={country} key={country}>
+                    countries.map(c => (
+                      <option value={c} key={c}>
                         {country}
                       </option>
                     ))

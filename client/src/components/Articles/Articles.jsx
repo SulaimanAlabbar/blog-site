@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withRouter, Redirect, Link } from "react-router-dom";
 import { QuillDeltaToHtmlConverter } from "quill-delta-to-html";
 import axios from "axios";
+import uuidv4 from "uuid/v4";
 import ReactHtmlParser from "react-html-parser";
 import * as actionCreators from "../../util/actionCreators";
 import Loader from "../Loader";
@@ -21,7 +22,7 @@ class Articles extends Component {
 
     try {
       const { pageNum } = this.props;
-      const page = typeof pageNum === "boolean" ? 0 : (Number(pageNum) - 1) * 5;
+      const page = Number(pageNum) === 0 ? 0 : (Number(pageNum) - 1) * 5;
       const articles = await axios.get(process.env.REACT_APP_ARTICLES + page);
 
       if (!this._mounted) return;
@@ -62,8 +63,8 @@ class Articles extends Component {
     return (
       <div className="Articles--container">
         <ul className="Articles--ArticleList">
-          {articles.map((article, i) => (
-            <li className="Articles--Article--container" key={i}>
+          {articles.map(article => (
+            <li className="Articles--Article--container" key={uuidv4()}>
               <div className="Articles--Article--header">
                 <Link to={`/article/${article.article_id}`}>
                   <h1 className="Articles--Article--title">

@@ -87,7 +87,6 @@ class UserPanel extends Component {
             alt="avatar"
             className="UserPanelAvatar"
           />
-          ;
         </div>
         <div className="UserPanel--logged--buttons--name">
           <div className={`UserPanel--logged--buttons${closed}`}>

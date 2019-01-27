@@ -18,8 +18,6 @@ module.exports = async (req, res, dbPool) => {
       [req.params.articleId, req.params.from]
     );
 
-    console.log("FETCHING COMMENTS");
-
     if (response.rows.length === 0) return res.status(200).json(false);
 
     return res.status(200).json(response.rows);

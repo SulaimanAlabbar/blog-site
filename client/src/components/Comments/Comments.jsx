@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
+import uuidv4 from "uuid/v4";
 import { QuillDeltaToHtmlConverter } from "quill-delta-to-html";
 import ReactHtmlParser from "react-html-parser";
 import * as actionCreators from "../../util/actionCreators";
@@ -67,7 +68,7 @@ class Comments extends Component {
       <div className="Comments--container">
         <ul className="Comments--CommentsList">
           {comments.map((comment, i) => (
-            <li className="Comments--Comment--container" key={i}>
+            <li className="Comments--Comment--container" key={uuidv4()}>
               <div className="Comments--Comment--header">
                 <img
                   src={
