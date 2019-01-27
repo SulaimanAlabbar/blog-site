@@ -30,7 +30,7 @@
     "pg": "^7.7.1",
     "serve-favicon": "^2.5.0",
     "validator": "^10.9.0",
-    "winston": "^3.1.0",
+    "winston": "^3.2.0",
     "winston-daily-rotate-file": "^3.6.0"
   },
   "devDependencies": {
