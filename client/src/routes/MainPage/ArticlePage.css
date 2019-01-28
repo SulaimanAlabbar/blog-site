@@ -1,5 +1,5 @@
 .ArticlePage--container {
-  background-color: wheat;
+  background-color: #F0F3F6;
   display: grid;
   grid-template-columns: auto minmax(640px, 1450px) 400px auto;
   grid-template-rows: 150px 50px 50px 400px 400px auto auto 320px;
@@ -19,7 +19,7 @@
 }
 
 .ArticlePage--container--hideComments {
-  background-color: wheat;
+  background-color: #F0F3F6;
   display: grid;
   grid-template-columns: auto minmax(640px, 1450px) 400px auto;
   grid-template-rows: 150px 50px 50px 400px 400px auto 320px;
@@ -38,7 +38,7 @@
 }
 
 .ArticlePage--container--hideCommentDraft {
-  background-color: wheat;
+  background-color: #F0F3F6;
   display: grid;
   grid-template-columns: auto minmax(640px, 1450px) 400px auto;
   grid-template-rows: 150px 50px 50px 400px 400px auto auto;
@@ -57,7 +57,7 @@
 }
 
 .ArticlePage--container--hideComments--hideCommentDraft {
-  background-color: wheat;
+  background-color: #F0F3F6;
   display: grid;
   grid-template-columns: auto minmax(640px, 1450px) 400px auto;
   grid-template-rows: 150px 50px 50px 400px 400px auto;
@@ -81,42 +81,50 @@
 
 .ArticlePage--UserPanel {
   grid-area: UserPanel;
-  background-color: rgb(107, 105, 105);
+  background-color: #FFFFFF;
+  box-shadow: 1px 5px 15px 5px #AFAFAF;
 }
 
 .ArticlePage--SocialPanel {
-  background-color: snow;
   grid-area: SocialPanel;
+  background-color: #FFFFFF;
+  box-shadow: 1px 5px 15px 5px #AFAFAF;
 }
 
 .ArticlePage--Article {
-  background-color: white;
   grid-area: Article;
+  background-color: #FFFFFF;
+  box-shadow: 1px 5px 15px 5px #AFAFAF;
 }
 
 .ArticlePage--SearchPanel {
-  background-color: green;
   grid-area: SearchPanel;
+  background-color: #FFFFFF;
+  box-shadow: 1px 5px 15px 5px #AFAFAF;
 }
 
 .ArticlePage--Description {
-  background-color: mediumaquamarine;
   grid-area: Description;
+  background-color: #FFFFFF;
+  box-shadow: 1px 5px 15px 5px #AFAFAF;
 }
 
 .ArticlePage--Archive {
-  background-color: yellowgreen;
   grid-area: Archive;
+  background-color: #FFFFFF;
+  box-shadow: 1px 5px 15px 5px #AFAFAF;
 }
 
 .ArticlePage--Comments {
-  background-color: lightblue;
   grid-area: Comments;
+  background-color: #FFFFFF;
+  /* box-shadow: 1px 5px 15px 5px #AFAFAF; */
 }
 
 .ArticlePage--CommentDraft {
-  background-color: #f5deb3;
   grid-area: CommentDraft;
+  background-color: #FFFFFF;
+  box-shadow: 1px 5px 15px 5px #AFAFAF;
 }
 
 .ArticlePage--Comments--hideComments {

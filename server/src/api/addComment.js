@@ -15,7 +15,7 @@ module.exports = async (req, res, dbPool) => {
   const client = await dbPool.connect();
   try {
     const response = await client.query(
-      `select * from comments where article_id = $1`,
+      `select * from articles where id = $1`,
       [req.body.articleId]
     );
 

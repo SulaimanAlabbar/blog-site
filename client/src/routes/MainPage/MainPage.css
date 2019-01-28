@@ -1,5 +1,5 @@
 .MainPage--container {
-  background-color: wheat;
+  background-color: #E0E0E0;
   display: grid;
   grid-template-columns: auto minmax(640px, 1450px) 400px auto;
   grid-template-rows: 150px 50px 50px 400px 400px auto 40px;
@@ -18,18 +18,20 @@
 }
 
 .MainPage--Header {
-  background-color: #0094ff;
   grid-area: Header;
+  background-color: #0094ff;
 }
 
 .MainPage--UserPanel {
   grid-area: UserPanel;
-  background-color: rgb(107, 105, 105);
+  background-color: #FFFFFF;
+  box-shadow: 1px 5px 15px 5px #AFAFAF;
 }
 
 .MainPage--SocialPanel {
-  background-color: snow;
   grid-area: SocialPanel;
+  background-color: #FFFFFF;
+  box-shadow: 1px 5px 15px 5px #AFAFAF;
 }
 
 .MainPage--Articles {
@@ -37,18 +39,21 @@
 }
 
 .MainPage--SearchPanel {
-  background-color: green;
   grid-area: SearchPanel;
+  background-color: #FFFFFF;
+  box-shadow: 1px 5px 15px 5px #AFAFAF;
 }
 
 .MainPage--Description {
-  background-color: mediumaquamarine;
   grid-area: Description;
+  background-color: #FFFFFF;
+  box-shadow: 1px 5px 15px 5px #AFAFAF;
 }
 
 .MainPage--Archive {
-  background-color: yellowgreen;
   grid-area: Archive;
+  background-color: #FFFFFF;
+  box-shadow: 1px 5px 15px 5px #AFAFAF;
 }
 
 .MainPage--Pagination {
