@@ -1,5 +1,5 @@
-.LoginModal--modal {
-  position: absolute;
+.SubmitDraftModal--modal {
+  position: fixed;
   width: 550px;
   height: 420px;
   left: 50%;
@@ -14,8 +14,8 @@
   align-items: center;
 }
 
-.LoginModal--modal--close {
-  position: absolute;
+.SubmitDraftModal--modal--close {
+  position: fixed;
   width: 550px;
   height: 420px;
   left: 50%;
@@ -31,8 +31,8 @@
   align-items: center;
 }
 
-.LoginModal--shade {
-  position: absolute;
+.SubmitDraftModal--shade {
+  position: fixed;
   background: rgba(0, 0, 0, 0.8);
   top: 0;
   left: 0;
@@ -43,8 +43,8 @@
   animation: fadein 0.4s;
 }
 
-.LoginModal--shade--close {
-  position: absolute;
+.SubmitDraftModal--shade--close {
+  position: fixed;
   background: rgba(0, 0, 0, 0.8);
   top: 0;
   left: 0;
@@ -71,19 +71,6 @@
   align-items: center;
   font-size: 2rem;
   color: white;
-}
-
-.LoginSuccess {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 4rem;
-  color: white;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  position: relative;
-  bottom: 20px;
 }
 
 .SubmitDraftModal--loading--header {

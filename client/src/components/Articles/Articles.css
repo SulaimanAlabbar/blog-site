@@ -49,6 +49,7 @@
 .Articles--Article--body {
   font-size: 1.2rem;
   font-weight: 500;
+  word-wrap: break-word;
 }
 
 .Articles--Article--body img {
@@ -63,4 +64,32 @@
   margin: 20px auto;
   width: 720px;
   height: 480px;
+}
+
+@media only screen and (max-width: 1200px){
+  .Articles--Article--body .ql-video {
+    width: 480px;
+    height: 320px;
+  }
+}
+
+@media only screen and (max-width: 1080px){
+  
+  .Articles--Article--body img {
+    width: 240px;
+  }
+  .Articles--Article--body .ql-video {
+    width: 360px;
+    height: 480px;
+  }
+}
+
+@media only screen and (max-width: 425px){
+  .Articles--Article--body img {
+    width: 320px;
+  }
+  .Articles--Article--body .ql-video {
+    width: 360px;
+    height: 240px;
+  }
 }

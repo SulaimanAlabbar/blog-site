@@ -13,8 +13,9 @@ const cookieParser = require("cookie-parser");
 // const multer = require("multer");
 const { Pool } = require("pg");
 const passport = require("passport");
-const getBlogInfo = require("./api/getBlogInfo");
 const session = require("express-session");
+const getBlogInfo = require("./api/getBlogInfo");
+const getPinnedArticles = require("./api/getPinnedArticles");
 const addArticle = require("./api/addArticle");
 const addComment = require("./api/addComment");
 const register = require("./api/register");
@@ -139,6 +140,10 @@ server.get("/api/comments/:articleId-:from", (req, res) =>
 );
 server.get("/api/numOfArticles", (req, res) =>
   getNumOfArticles(req, res, dbPool)
+);
+
+server.get("/api/pinnedArticles", (req, res) =>
+  getPinnedArticles(req, res, dbPool)
 );
 
 // server.use((req, res) => {

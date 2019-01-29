@@ -1,0 +1,29 @@
+.PinnedArticles--container{
+  animation: fadein 2s;
+  margin: 0;
+  padding: 10px 5px 0;
+}
+
+.PinnedArticles--header {
+  margin: 0;
+  padding: 0;
+  font-size: 2.7rem;
+}
+
+/* .PinnedArticles--articleList{
+
+} */
+
+.PinnedArticles--article {
+  font-size: 1.2rem;
+  font-weight: 500;
+  word-wrap: break-word;
+  cursor: pointer;
+  transition: color 0.25s;
+}
+.PinnedArticles--article:hover {
+  color: red;
+}
+.PinnedArticles--article:active {
+  color: rgb(255, 187, 187);
+}

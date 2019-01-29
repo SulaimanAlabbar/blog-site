@@ -42,3 +42,31 @@
   width: 720px;
   height: 480px;
 }
+
+@media only screen and (max-width: 1200px){
+  .Article--Article--body .ql-video {
+    width: 480px;
+    height: 320px;
+  }
+}
+
+@media only screen and (max-width: 1080px){
+  
+  .Article--Article--body img {
+    width: 240px;
+  }
+  .Article--Article--body .ql-video {
+    width: 360px;
+    height: 480px;
+  }
+}
+
+@media only screen and (max-width: 425px){
+  .Article--Article--body img {
+    width: 320px;
+  }
+  .Article--Article--body .ql-video {
+    width: 360px;
+    height: 240px;
+  }
+}

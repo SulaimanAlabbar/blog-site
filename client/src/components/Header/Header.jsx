@@ -43,7 +43,7 @@ class Header extends Component {
     return (
       <Link to="/">
         <div className="Banner--container">
-          <img src={bannerImage} alt="bannerImage" className="Banner--image" />
+          {/* <img src={bannerImage} alt="bannerImage" className="Banner--image" /> */}
         </div>
       </Link>
     );
