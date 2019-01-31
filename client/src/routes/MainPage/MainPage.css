@@ -19,7 +19,8 @@
 
 .MainPage--Header {
   grid-area: Header;
-  background-color: #0094ff;
+  background-color: #FFFFFF;
+  box-shadow: 1px 5px 15px 5px #AFAFAF;
 }
 
 .MainPage--UserPanel {
@@ -84,7 +85,7 @@
 @media only screen and (max-width: 425px){
   .MainPage--container {
     grid-template-columns: auto 400px auto;
-    grid-template-rows: auto auto auto auto auto auto auto auto;
+    grid-template-rows: 200px auto auto auto auto auto auto auto;
     grid-template-areas:
       ".        Header        ."
       ".        UserPanel     ."

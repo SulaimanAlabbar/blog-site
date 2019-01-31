@@ -32,7 +32,6 @@
   right: 0;
   bottom: 0;
   z-index: 10;
-  height: 100vh;
   animation: fadein 0.4s;
 }
 
@@ -44,7 +43,6 @@
   right: 0;
   bottom: 0;
   z-index: 10;
-  height: 100vh;
   animation: fadeout 0.4s;
 }
 
@@ -159,4 +157,15 @@
   padding: 0;
   position: relative;
   bottom: 20px;
+}
+
+@media only screen and (max-width: 425px){
+  .LoginModal--modal {
+    width: 400px;
+    height: 420px;
+  }
+  .LoginForm--input {
+    width: 140px;
+    height: 40px;
+  }
 }
