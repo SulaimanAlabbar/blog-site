@@ -9,8 +9,7 @@ class Header extends Component {
 
   state = {
     loaded: false,
-    bannerImage: ""
-    // bannerText: ""
+    bannerText: ""
   };
 
   componentDidMount = async () => {
@@ -19,8 +18,7 @@ class Header extends Component {
       const blogInfo = await axios.get(process.env.REACT_APP_BLOG_INFO);
       this.setState({
         loaded: true,
-        bannerImage: blogInfo.data.banner_image
-        // bannerText: blogInfo.data.banner_text
+        bannerText: blogInfo.data.banner_text
       });
     } catch (error) {
       console.error(error);
@@ -32,7 +30,7 @@ class Header extends Component {
   };
 
   render() {
-    const { loaded, bannerImage } = this.state;
+    const { loaded, bannerText } = this.state;
     if (!loaded)
       return (
         <div className="container--loader--big">
@@ -43,7 +41,7 @@ class Header extends Component {
     return (
       <Link to="/">
         <div className="Banner--container">
-          <img src={bannerImage} alt="bannerImage" className="Banner--image" />
+          <h1 className="Banner--header">{bannerText}</h1>
         </div>
       </Link>
     );

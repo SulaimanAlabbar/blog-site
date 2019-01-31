@@ -91,7 +91,7 @@ class SubmitDraftModal extends Component {
       return (
         <>
           <div
-            className={`LoginModal--modal${modalClosed} ${modalSuccess} ${modalFail}`}
+            className={`SubmitDraftModal--modal${modalClosed} ${modalSuccess} ${modalFail}`}
           >
             <h2 className="SubmitDraftModal--loading--header">
               Submitting Draft
@@ -100,7 +100,7 @@ class SubmitDraftModal extends Component {
               <Loader />
             </div>
           </div>
-          <div className={`LoginModal--shade${modalClosed}`} />
+          <div className={`SubmitDraftModal--shade${modalClosed}`} />
         </>
       );
 
@@ -108,22 +108,22 @@ class SubmitDraftModal extends Component {
       return (
         <>
           <div
-            className={`LoginModal--modal${modalClosed} ${modalSuccess} ${modalFail}`}
+            className={`SubmitDraftModal--modal${modalClosed} ${modalSuccess} ${modalFail}`}
           >
             <h2>Draft Submitted</h2>
           </div>
-          <div className={`LoginModal--shade${modalClosed}`} />
+          <div className={`SubmitDraftModal--shade${modalClosed}`} />
         </>
       );
 
     return (
       <>
         <div
-          className={`LoginModal--modal${modalClosed} ${modalSuccess} ${modalFail}`}
+          className={`SubmitDraftModal--modal${modalClosed} ${modalSuccess} ${modalFail}`}
         >
           <h2>Couldnt Submit Draft</h2>
         </div>
-        <div className={`LoginModal--shade${modalClosed}`} />
+        <div className={`SubmitDraftModal--shade${modalClosed}`} />
       </>
     );
   }

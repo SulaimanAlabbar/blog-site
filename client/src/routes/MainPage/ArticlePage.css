@@ -1,5 +1,5 @@
 .ArticlePage--container {
-  background-color: wheat;
+  background-color: #E0E0E0;
   display: grid;
   grid-template-columns: auto minmax(640px, 1450px) 400px auto;
   grid-template-rows: 150px 50px 50px 400px 400px auto auto 320px;
@@ -15,11 +15,10 @@
 
   grid-gap: 10px;
   padding: 20px 0;
-  min-height: 100vh;
 }
 
 .ArticlePage--container--hideComments {
-  background-color: wheat;
+  background-color: #E0E0E0;
   display: grid;
   grid-template-columns: auto minmax(640px, 1450px) 400px auto;
   grid-template-rows: 150px 50px 50px 400px 400px auto 320px;
@@ -34,11 +33,10 @@
 
   grid-gap: 10px;
   padding: 20px 0;
-  min-height: 100vh;
 }
 
 .ArticlePage--container--hideCommentDraft {
-  background-color: wheat;
+  background-color: #E0E0E0;
   display: grid;
   grid-template-columns: auto minmax(640px, 1450px) 400px auto;
   grid-template-rows: 150px 50px 50px 400px 400px auto auto;
@@ -53,11 +51,10 @@
 
   grid-gap: 10px;
   padding: 20px 0;
-  min-height: 100vh;
 }
 
 .ArticlePage--container--hideComments--hideCommentDraft {
-  background-color: wheat;
+  background-color: #E0E0E0;
   display: grid;
   grid-template-columns: auto minmax(640px, 1450px) 400px auto;
   grid-template-rows: 150px 50px 50px 400px 400px auto;
@@ -71,52 +68,59 @@
 
   grid-gap: 10px;
   padding: 20px 0;
-  min-height: 100vh;
 }
 
 .ArticlePage--Header {
-  background-color: #0094ff;
   grid-area: Header;
+  background-color: #FFFFFF;
+  box-shadow: 1px 5px 15px 5px #AFAFAF;
 }
 
 .ArticlePage--UserPanel {
   grid-area: UserPanel;
-  background-color: rgb(107, 105, 105);
+  background-color: #FFFFFF;
+  box-shadow: 1px 5px 15px 5px #AFAFAF;
 }
 
 .ArticlePage--SocialPanel {
-  background-color: snow;
   grid-area: SocialPanel;
+  background-color: #FFFFFF;
+  box-shadow: 1px 5px 15px 5px #AFAFAF;
 }
 
 .ArticlePage--Article {
-  background-color: white;
   grid-area: Article;
+  background-color: #FFFFFF;
+  box-shadow: 1px 5px 15px 5px #AFAFAF;
 }
 
 .ArticlePage--SearchPanel {
-  background-color: green;
   grid-area: SearchPanel;
+  background-color: #FFFFFF;
+  box-shadow: 1px 5px 15px 5px #AFAFAF;
 }
 
 .ArticlePage--Description {
-  background-color: mediumaquamarine;
   grid-area: Description;
+  background-color: #FFFFFF;
+  box-shadow: 1px 5px 15px 5px #AFAFAF;
 }
 
 .ArticlePage--Archive {
-  background-color: yellowgreen;
   grid-area: Archive;
+  background-color: #FFFFFF;
+  box-shadow: 1px 5px 15px 5px #AFAFAF;
 }
 
 .ArticlePage--Comments {
-  background-color: lightblue;
   grid-area: Comments;
+  background-color: #FFFFFF;
 }
 
 .ArticlePage--CommentDraft {
-  background-color: #f5deb3;
   grid-area: CommentDraft;
+  background-color: #FFFFFF;
+  box-shadow: 1px 5px 15px 5px #AFAFAF;
 }
 
 .ArticlePage--Comments--hideComments {
@@ -139,5 +143,79 @@
     -webkit-transform: scale(1.2);
     -moz-transform: scale(1.2);
     transform: scale(1.2);
+  }
+}
+
+@media only screen and (max-width: 1080px){
+  .ArticlePage--container {
+    grid-template-columns: auto minmax(500px, 640px) 400px auto;
+  }
+  .ArticlePage--container--hideComments {
+    grid-template-columns: auto minmax(500px, 640px) 400px auto;
+  }
+  .ArticlePage--container--hideCommentDraft {
+    grid-template-columns: auto minmax(500px, 640px) 400px auto;
+  }
+  .ArticlePage--container--hideComments--hideCommentDraft {
+    grid-template-columns: auto minmax(500px, 640px) 400px auto;
+  }
+}
+
+@media only screen and (max-width: 425px){
+  .ArticlePage--container {
+    grid-template-columns: auto 400px auto;
+    grid-template-rows: 200px auto auto auto auto 320px 50px;
+    grid-template-areas:
+      ".        Header        ."
+      ".        UserPanel     ."
+      ".        SearchPanel   ."
+      ".        Article       ."
+      ".        Comments      ."
+      ".        CommentDraft  ."
+      ".        SocialPanel   .";
+  }
+
+  .ArticlePage--container--hideComments {
+    grid-template-columns: auto 400px auto;
+    grid-template-rows: 200px auto auto auto auto 320px 50px;
+    grid-template-areas:
+      ".        Header        ."
+      ".        UserPanel     ."
+      ".        SearchPanel   ."
+      ".        Article       ."
+      ".        Comments      ."
+      ".        CommentDraft  ."
+      ".        SocialPanel   .";
+  }
+  .ArticlePage--container--hideCommentDraft {
+    grid-template-columns: auto 400px auto;
+    grid-template-rows: 200px auto auto auto auto auto 50px;
+    grid-template-areas:
+      ".        Header        ."
+      ".        UserPanel     ."
+      ".        SearchPanel   ."
+      ".        Article       ."
+      ".        Comments      ."
+      ".        CommentDraft  ."
+      ".        SocialPanel   .";
+  }
+  .ArticlePage--container--hideComments--hideCommentDraft {
+    grid-template-columns: auto 400px auto;
+    grid-template-rows: 200px auto auto auto auto auto 50px;
+    grid-template-areas:
+      ".        Header        ."
+      ".        UserPanel     ."
+      ".        SearchPanel   ."
+      ".        Article       ."
+      ".        Comments      ."
+      ".        CommentDraft  ."
+      ".        SocialPanel   .";
+  }
+
+  .ArticlePage--Archive {
+    display: none;
+  }
+  .ArticlePage--Description {
+    display: none;
   }
 }

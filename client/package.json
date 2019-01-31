@@ -9,7 +9,7 @@
     "axios": "^0.18.0",
     "draft-js": "^0.10.5",
     "draftjs-to-html": "^0.8.4",
-    "formik": "^1.4.2",
+    "formik": "^1.4.3",
     "quill-delta": "^4.1.0",
     "quill-delta-to-html": "^0.10.6",
     "react": "^16.6.3",
@@ -43,7 +43,7 @@
   "devDependencies": {
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^3.6.0",
-    "eslint-plugin-import": "^2.15.0",
+    "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-jsx-a11y": "^6.2.0",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.12.4"

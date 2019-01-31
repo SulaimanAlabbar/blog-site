@@ -67,7 +67,7 @@ class Comments extends Component {
     return (
       <div className="Comments--container">
         <ul className="Comments--CommentsList">
-          {comments.map((comment, i) => (
+          {comments.map(comment => (
             <li className="Comments--Comment--container" key={uuidv4()}>
               <div className="Comments--Comment--header">
                 <img

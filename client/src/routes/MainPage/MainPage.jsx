@@ -4,6 +4,7 @@ import { Route, Switch, Redirect, withRouter } from "react-router-dom";
 import * as actionCreators from "../../util/actionCreators";
 import SearchPanel from "../../components/SearchPanel";
 import Description from "../../components/Description";
+import PinnedArticles from "../../components/PinnedArticles";
 import Header from "../../components/Header";
 import SocialMedia from "../../components/SocialMedia";
 import UserPanel from "../../components/UserPanel";
@@ -83,7 +84,9 @@ function MainPage({ location, role }) {
       <div className={`${page}--Description`}>
         <Description />
       </div>
-      <div className={`${page}--Archive`}>archive</div>
+      <div className={`${page}--Archive`}>
+        <PinnedArticles />
+      </div>
       <Route
         exact
         path="/article/:articleId"

@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "devserver": "./node_modules/nodemon/bin/nodemon.js src/index.js",
     "start_prod": "NODE_ENV=production node ./src/index.js"
   },
   "author": "sulaiman",
