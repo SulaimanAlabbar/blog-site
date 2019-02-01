@@ -17,6 +17,9 @@ body {
   display: none;
 }
 
+.active {
+  color: red;
+}
 a {
   text-decoration: none !important;
 }

@@ -1,19 +1,18 @@
 const path = require("path");
 require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
-const { createLogger, format, transports } = require("winston");
+const winston = require("winston");
 require("winston-daily-rotate-file");
 const fs = require("fs");
 const express = require("express");
 const helmet = require("helmet");
 const compression = require("compression");
-// const csrf = require("csurf");
-const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-// const morgan = require("morgan");
-// const multer = require("multer");
+const morgan = require("morgan");
 const { Pool } = require("pg");
+const redis = require("redis");
 const passport = require("passport");
 const session = require("express-session");
+const RedisStore = require("connect-redis")(session);
 const getBlogInfo = require("./api/getBlogInfo");
 const getPinnedArticles = require("./api/getPinnedArticles");
 const addArticle = require("./api/addArticle");
@@ -24,7 +23,7 @@ const getArticles = require("./api/getArticles");
 const getComments = require("./api/getComments");
 const getArticle = require("./api/getArticle");
 const auth = require("./auth");
-const logDir = "../logs";
+const logDir = path.resolve(__dirname, "../logs");
 const port = process.env.PORT || 4000;
 
 const dbPool = new Pool({
@@ -40,41 +39,73 @@ dbPool.on("error", err => {
   process.exit(-1);
 });
 
+const redisClient = redis.createClient();
+
 if (!fs.existsSync(logDir)) {
   fs.mkdirSync(logDir);
 }
 
-const filename = path.join(logDir, "results.log");
-
-const dailyRotateFileTransport = new transports.DailyRotateFile({
-  filename: `${logDir}/%DATE%-results.log`,
-  datePattern: "YYYY-MM-DD"
-});
-
-const logger = createLogger({
+const infofile = new winston.transports.DailyRotateFile({
   level: "info",
-  format: format.combine(
-    format.timestamp({
+  format: winston.format.combine(
+    winston.format.timestamp({
       format: "YYYY-MM-DD HH:mm:ss"
     }),
-    format.printf(info => `${info.timestamp} ${info.level}: ${info.message}`)
+    winston.format.printf(info => `${info.timestamp} ${info.message}`)
   ),
-  transports: [new transports.File({ filename }), dailyRotateFileTransport]
+  filename: `${logDir}/%DATE%-info.log`,
+  datePattern: "YYYY-MM-DD",
+  zippedArchive: true,
+  maxSize: "100m",
+  maxFiles: "14d"
 });
 
-// process.on("uncaughtException", error => {
-//   logger.log("error", error);
-//   process.exit(-1);
-// });
+const errorfile = new winston.transports.DailyRotateFile({
+  level: "error",
+  format: winston.format.combine(
+    winston.format.timestamp({
+      format: "YYYY-MM-DD HH:mm:ss"
+    }),
+    winston.format.errors({ stack: true }),
+    winston.format.printf(error => `${error.timestamp} ${error.message}`)
+  ),
+  filename: `${logDir}/%DATE%-error.log`,
+  datePattern: "YYYY-MM-DD",
+  zippedArchive: true,
+  maxSize: "20m",
+  maxFiles: "30d"
+});
 
-// process.on("unhandledRejection", error => {
-//   logger.log("error", error);
-//   process.exit(-1);
-// });
+const logger = winston.createLogger({
+  transports: [infofile, errorfile]
+});
 
-// process.on("warning", warning => {
-//   logger.log("warning", warning);
-// });
+if (process.env.NODE_ENV !== "production") {
+  logger.add(
+    new winston.transports.Console({
+      format: winston.format.combine(
+        winston.format.colorize(),
+        winston.format.simple()
+      )
+    })
+  );
+}
+
+logger.stream = {
+  write: (message, encoding) => {
+    logger.info(message);
+  }
+};
+
+process.on("uncaughtException", error => {
+  logger.log("error", error);
+  process.exit(-1);
+});
+
+process.on("unhandledRejection", error => {
+  logger.log("error", error);
+  process.exit(-1);
+});
 
 auth(passport, dbPool);
 
@@ -82,34 +113,24 @@ const server = express();
 server.use(helmet());
 server.use(compression());
 server.use(express.static("public"));
-
-// server.use(morgan("combined"));
-// body parser now part of express
+server.use(express.json({ limit: "50mb" }));
+server.use(express.urlencoded({ extended: true, limit: "50mb" }));
 server.use(cookieParser());
-server.use(bodyParser.json({ limit: "50mb" }));
-server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
-
-// server.use(csrf());
-
-// server.use((req, res, next) => {
-//   // Expose variable to templates via locals
-//   res.locals.csrftoken = req.csrfToken();
-//   next();
-// });
-
-/* <input type="hidden" name="<i>csrf" value={{csrftoken}} /> */
-
 server.use(
   session({
-    secret: "sekrit",
-    // name: "sessionId",
+    secret: "seakrit",
     resave: true,
-    saveUninitialized: false
+    saveUninitialized: false,
+    store: new RedisStore({
+      host: process.env.REDIS_HOST,
+      port: process.env.REDIS_HOST,
+      client: redisClient
+    })
   })
 );
-
 server.use(passport.initialize());
 server.use(passport.session());
+server.use(morgan("combined", { stream: logger.stream }));
 
 function checkAuthentication (req, res, next) {
   if (req.isAuthenticated()) next();
@@ -119,6 +140,10 @@ function checkAuthentication (req, res, next) {
 server.get("/api/blogInfo", (req, res) => getBlogInfo(req, res, dbPool));
 server.post("/api/register", (req, res) => register(req, res, dbPool));
 server.post("/api/login", passport.authenticate("local"), (req, res) => {
+  const { id, name, email, avatar, role } = req.user;
+  res.json({ id, name, email, avatar, role });
+});
+server.get("/api/loggedIn", checkAuthentication, (req, res) => {
   const { id, name, email, avatar, role } = req.user;
   res.json({ id, name, email, avatar, role });
 });
@@ -153,4 +178,3 @@ server.get("/api/pinnedArticles", (req, res) =>
 server.listen(port, () =>
   console.log(`Server running in ${server.get("env")} mode on port ${port}`)
 );
-// NODE_ENV=production
