@@ -5,8 +5,6 @@ import uuidv4 from "uuid/v4";
 import Loader from "../Loader";
 import "./PinnedArticles.css";
 
-console.log("HELLO");
-
 class PinnedArticles extends Component {
   state = {
     loaded: false,
@@ -14,7 +12,6 @@ class PinnedArticles extends Component {
   };
 
   componentDidMount = async () => {
-    // fetch articles here
     try {
       const response = await axios.get(process.env.REACT_APP_PINNED_ARTICLES);
 
@@ -31,6 +28,7 @@ class PinnedArticles extends Component {
 
   render() {
     const { loaded, pinnedArticles } = this.state;
+
     if (!loaded) return <Loader />;
 
     return (

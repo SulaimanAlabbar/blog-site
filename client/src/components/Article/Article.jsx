@@ -16,6 +16,10 @@ class Article extends Component {
     falseArticleId: false
   };
 
+  componentDidUpdate = () => {
+    console.log("article update");
+  };
+
   componentDidMount = async () => {
     this._mounted = true;
 
