@@ -19,10 +19,6 @@ import "./MainPage.css";
 import "./ArticlePage.css";
 
 class MainPage extends Component {
-  componentDidUpdate = () => {
-    console.log(this.props);
-  };
-
   componentDidMount = async () => {
     try {
       const loginInfo = await axios.get(process.env.REACT_APP_LOGGED_IN);

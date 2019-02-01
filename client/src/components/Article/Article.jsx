@@ -16,8 +16,45 @@ class Article extends Component {
     falseArticleId: false
   };
 
-  componentDidUpdate = () => {
-    console.log("article update");
+  componentDidUpdate = async prevProps => {
+    if (this.props.articleId !== prevProps.articleId) {
+      this.setState(
+        {
+          loaded: false
+        },
+        async () => {
+          (function smoothscroll() {
+            const currentScroll =
+              document.documentElement.scrollTop || document.body.scrollTop;
+            if (currentScroll > 0) {
+              window.requestAnimationFrame(smoothscroll);
+              window.scrollTo(0, currentScroll - currentScroll / 5);
+            }
+          })();
+          try {
+            const article = await axios.get(
+              process.env.REACT_APP_ARTICLE + this.props.articleId
+            );
+
+            if (!this._mounted) return;
+
+            this.props.setCurrentArticle(article.data);
+            if (article.data) {
+              this.setState({
+                loaded: true
+              });
+            } else {
+              this.setState({
+                loaded: true,
+                falseArticleId: true
+              });
+            }
+          } catch (error) {
+            console.error(error);
+          }
+        }
+      );
+    }
   };
 
   componentDidMount = async () => {
