@@ -93,7 +93,6 @@ auth(passport, dbPool);
 
 const server = express();
 server.use(helmet());
-server.use("/", express.static("public"));
 server.use(express.json({ limit: "50mb" }));
 server.use(express.urlencoded({ extended: true, limit: "50mb" }));
 server.use(cookieParser());

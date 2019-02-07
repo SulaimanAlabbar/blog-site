@@ -1,9 +1,7 @@
 client/node_modules
 server/node_modules
 client/.env
-client/src/.env
 server/.env
-server/src/.env
 client/build/
 server/public/
 server/src/api/unfinished/
@@ -11,3 +9,4 @@ server/src/database/
 server/logs
 server/src/logs
 log.txt
+blog-site.conf
