@@ -5,7 +5,6 @@ require("winston-daily-rotate-file");
 const fs = require("fs");
 const express = require("express");
 const helmet = require("helmet");
-const compression = require("compression");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
 const { Pool } = require("pg");
@@ -80,23 +79,6 @@ const logger = winston.createLogger({
   transports: [infofile, errorfile]
 });
 
-if (process.env.NODE_ENV !== "production") {
-  logger.add(
-    new winston.transports.Console({
-      format: winston.format.combine(
-        winston.format.colorize(),
-        winston.format.simple()
-      )
-    })
-  );
-}
-
-logger.stream = {
-  write: (message, encoding) => {
-    logger.info(message);
-  }
-};
-
 process.on("uncaughtException", error => {
   logger.log("error", error);
   process.exit(-1);
@@ -111,8 +93,7 @@ auth(passport, dbPool);
 
 const server = express();
 server.use(helmet());
-server.use(compression());
-server.use(express.static("public"));
+server.use("/", express.static("public"));
 server.use(express.json({ limit: "50mb" }));
 server.use(express.urlencoded({ extended: true, limit: "50mb" }));
 server.use(cookieParser());
@@ -130,7 +111,10 @@ server.use(
 );
 server.use(passport.initialize());
 server.use(passport.session());
-server.use(morgan("combined", { stream: logger.stream }));
+
+if (process.env.NODE_ENV !== "production") {
+  server.use(morgan("combined"));
+}
 
 function checkAuthentication (req, res, next) {
   if (req.isAuthenticated()) next();
@@ -170,10 +154,6 @@ server.get("/api/numOfArticles", (req, res) =>
 server.get("/api/pinnedArticles", (req, res) =>
   getPinnedArticles(req, res, dbPool)
 );
-
-// server.use((req, res) => {
-//   res.status(404).send({ url: req.originalUrl + " not found" });
-// });
 
 server.listen(port, () =>
   console.log(`Server running in ${server.get("env")} mode on port ${port}`)
